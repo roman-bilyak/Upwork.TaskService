@@ -66,8 +66,14 @@
     <Build Include="Stored Procedures\spInsertTask.sql" />
     <Build Include="Stored Procedures\spUpdateTask.sql" />
     <Build Include="Stored Procedures\spDeleteTask.sql" />
+    <Build Include="Tables\fxPriority.sql" />
+    <Build Include="Tables\fxStatus.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Upwork.TaskService.Database.publish.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <PreDeploy Include="PreDeployment.sql" />
+    <PostDeploy Include="PostDeploment.sql" />
   </ItemGroup>
 </Project>

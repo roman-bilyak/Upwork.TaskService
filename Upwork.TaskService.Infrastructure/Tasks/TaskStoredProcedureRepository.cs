@@ -18,7 +18,7 @@ internal class TaskStoredProcedureRepository : IRepository<TaskEntity>
 
     public async Task<List<TaskEntity>> ListAsync(CancellationToken cancellationToken)
     {
-        using SqlConnection connection = new(_configuration.GetConnectionString("TaskDatabase"));
+        using SqlConnection connection = new(_configuration.GetConnectionString("TaskServiceDb"));
         using SqlCommand command = new("spGetAllTasks", connection);
         command.CommandType = CommandType.StoredProcedure;
 
@@ -28,24 +28,22 @@ internal class TaskStoredProcedureRepository : IRepository<TaskEntity>
             using var reader = await command.ExecuteReaderAsync(cancellationToken);
 
             List<TaskEntity> items = new();
-            if (reader.HasRows)
+            while (await reader.ReadAsync(cancellationToken))
             {
-                while (await reader.ReadAsync(cancellationToken))
+                TaskEntity item = new()
                 {
-                    TaskEntity item = new()
-                    {
-                        Id = reader.GetString(nameof(TaskEntity.Id)),
-                        Name = reader.GetString(nameof(TaskEntity.Name)),
-                        Description = reader.GetString(nameof(TaskEntity.Description)),
-                        DueDate = reader.GetDateTime(nameof(TaskEntity.DueDate)),
-                        StartDate = reader.GetDateTime(nameof(TaskEntity.StartDate)),
-                        EndDate = reader.GetDateTime(nameof(TaskEntity.EndDate)),
-                        Priority = (TaskPriorityEnum)reader.GetInt16(nameof(TaskEntity.Priority)),
-                        Status = (TaskStatusEnum)reader.GetInt16(nameof(TaskEntity.Status)),
-                    };
-                    items.Add(item);
-                }
+                    Id = reader.GetString(nameof(TaskEntity.Id)),
+                    Name = reader.GetString(nameof(TaskEntity.Name)),
+                    Description = reader.GetString(nameof(TaskEntity.Description)),
+                    DueDate = reader.GetDateTime(nameof(TaskEntity.DueDate)),
+                    StartDate = reader.GetDateTime(nameof(TaskEntity.StartDate)),
+                    EndDate = reader.GetDateTime(nameof(TaskEntity.EndDate)),
+                    Priority = (TaskPriorityEnum)reader.GetInt16(nameof(TaskEntity.Priority)),
+                    Status = (TaskStatusEnum)reader.GetInt16(nameof(TaskEntity.Status)),
+                };
+                items.Add(item);
             }
+
             await reader.CloseAsync();
             await connection.CloseAsync();
             return items;
@@ -62,7 +60,7 @@ internal class TaskStoredProcedureRepository : IRepository<TaskEntity>
 
     public async Task<TaskEntity?> FindAsync(string id, CancellationToken cancellationToken)
     {
-        using SqlConnection connection = new(_configuration.GetConnectionString("TaskDatabase"));
+        using SqlConnection connection = new(_configuration.GetConnectionString("TaskServiceDb"));
         using SqlCommand command = new("spGetTaskById", connection);
         command.CommandType = CommandType.StoredProcedure;
         command.Parameters.AddWithValue("@Id", id);
@@ -73,23 +71,21 @@ internal class TaskStoredProcedureRepository : IRepository<TaskEntity>
             using var reader = await command.ExecuteReaderAsync(cancellationToken);
 
             TaskEntity? item = null;
-            if (reader.HasRows)
+            if (await reader.ReadAsync(cancellationToken))
             {
-                while (await reader.ReadAsync(cancellationToken))
+                item = new()
                 {
-                    item = new()
-                    {
-                        Id = reader.GetString(nameof(TaskEntity.Id)),
-                        Name = reader.GetString(nameof(TaskEntity.Name)),
-                        Description = reader.GetString(nameof(TaskEntity.Description)),
-                        DueDate = reader.GetDateTime(nameof(TaskEntity.DueDate)),
-                        StartDate = reader.GetDateTime(nameof(TaskEntity.StartDate)),
-                        EndDate = reader.GetDateTime(nameof(TaskEntity.EndDate)),
-                        Priority = (TaskPriorityEnum)reader.GetInt16(nameof(TaskEntity.Priority)),
-                        Status = (TaskStatusEnum)reader.GetInt16(nameof(TaskEntity.Status)),
-                    };
-                }
+                    Id = reader.GetString(nameof(TaskEntity.Id)),
+                    Name = reader.GetString(nameof(TaskEntity.Name)),
+                    Description = reader.GetString(nameof(TaskEntity.Description)),
+                    DueDate = reader.GetDateTime(nameof(TaskEntity.DueDate)),
+                    StartDate = reader.GetDateTime(nameof(TaskEntity.StartDate)),
+                    EndDate = reader.GetDateTime(nameof(TaskEntity.EndDate)),
+                    Priority = (TaskPriorityEnum)reader.GetInt16(nameof(TaskEntity.Priority)),
+                    Status = (TaskStatusEnum)reader.GetInt16(nameof(TaskEntity.Status)),
+                };
             }
+
             await reader.CloseAsync();
             await connection.CloseAsync();
             return item;
@@ -106,7 +102,7 @@ internal class TaskStoredProcedureRepository : IRepository<TaskEntity>
 
     public async Task<TaskEntity> AddAsync(TaskEntity entity, CancellationToken cancellationToken)
     {
-        using SqlConnection connection = new(_configuration.GetConnectionString("TaskDatabase"));
+        using SqlConnection connection = new(_configuration.GetConnectionString("TaskServiceDb"));
         using SqlCommand command = new("spInsertTask", connection);
         command.CommandType = CommandType.StoredProcedure;
 
@@ -124,24 +120,23 @@ internal class TaskStoredProcedureRepository : IRepository<TaskEntity>
             await connection.OpenAsync(cancellationToken);
             using var reader = await command.ExecuteReaderAsync(cancellationToken);
 
-            TaskEntity? item = null;
-            if (reader.HasRows)
+            if (!await reader.ReadAsync(cancellationToken))
             {
-                while (await reader.ReadAsync(cancellationToken))
-                {
-                    item = new()
-                    {
-                        Id = reader.GetString(nameof(TaskEntity.Id)),
-                        Name = reader.GetString(nameof(TaskEntity.Name)),
-                        Description = reader.GetString(nameof(TaskEntity.Description)),
-                        DueDate = reader.GetDateTime(nameof(TaskEntity.DueDate)),
-                        StartDate = reader.GetDateTime(nameof(TaskEntity.StartDate)),
-                        EndDate = reader.GetDateTime(nameof(TaskEntity.EndDate)),
-                        Priority = (TaskPriorityEnum)reader.GetInt16(nameof(TaskEntity.Priority)),
-                        Status = (TaskStatusEnum)reader.GetInt16(nameof(TaskEntity.Status)),
-                    };
-                }
+                throw new InvalidOperationException();
             }
+
+            TaskEntity item = new()
+            {
+                Id = reader.GetString(nameof(TaskEntity.Id)),
+                Name = reader.GetString(nameof(TaskEntity.Name)),
+                Description = reader.GetString(nameof(TaskEntity.Description)),
+                DueDate = reader.GetDateTime(nameof(TaskEntity.DueDate)),
+                StartDate = reader.GetDateTime(nameof(TaskEntity.StartDate)),
+                EndDate = reader.GetDateTime(nameof(TaskEntity.EndDate)),
+                Priority = (TaskPriorityEnum)reader.GetInt16(nameof(TaskEntity.Priority)),
+                Status = (TaskStatusEnum)reader.GetInt16(nameof(TaskEntity.Status)),
+            };
+
             await reader.CloseAsync();
             await connection.CloseAsync();
             return item;
@@ -158,7 +153,7 @@ internal class TaskStoredProcedureRepository : IRepository<TaskEntity>
 
     public async Task<TaskEntity> UpdateAsync(TaskEntity entity, CancellationToken cancellationToken)
     {
-        using SqlConnection connection = new(_configuration.GetConnectionString("TaskDatabase"));
+        using SqlConnection connection = new(_configuration.GetConnectionString("TaskServiceDb"));
         using SqlCommand command = new("spUpdateTask", connection);
         command.CommandType = CommandType.StoredProcedure;
 
@@ -176,24 +171,23 @@ internal class TaskStoredProcedureRepository : IRepository<TaskEntity>
             await connection.OpenAsync(cancellationToken);
             using var reader = await command.ExecuteReaderAsync(cancellationToken);
 
-            TaskEntity? item = null;
-            if (reader.HasRows)
+            if (!await reader.ReadAsync(cancellationToken))
             {
-                while (await reader.ReadAsync(cancellationToken))
-                {
-                    item = new()
-                    {
-                        Id = reader.GetString(nameof(TaskEntity.Id)),
-                        Name = reader.GetString(nameof(TaskEntity.Name)),
-                        Description = reader.GetString(nameof(TaskEntity.Description)),
-                        DueDate = reader.GetDateTime(nameof(TaskEntity.DueDate)),
-                        StartDate = reader.GetDateTime(nameof(TaskEntity.StartDate)),
-                        EndDate = reader.GetDateTime(nameof(TaskEntity.EndDate)),
-                        Priority = (TaskPriorityEnum)reader.GetInt16(nameof(TaskEntity.Priority)),
-                        Status = (TaskStatusEnum)reader.GetInt16(nameof(TaskEntity.Status)),
-                    };
-                }
+                throw new InvalidOperationException();
             }
+
+            TaskEntity item = new()
+            {
+                Id = reader.GetString(nameof(TaskEntity.Id)),
+                Name = reader.GetString(nameof(TaskEntity.Name)),
+                Description = reader.GetString(nameof(TaskEntity.Description)),
+                DueDate = reader.GetDateTime(nameof(TaskEntity.DueDate)),
+                StartDate = reader.GetDateTime(nameof(TaskEntity.StartDate)),
+                EndDate = reader.GetDateTime(nameof(TaskEntity.EndDate)),
+                Priority = (TaskPriorityEnum)reader.GetInt16(nameof(TaskEntity.Priority)),
+                Status = (TaskStatusEnum)reader.GetInt16(nameof(TaskEntity.Status)),
+            };
+
             await reader.CloseAsync();
             await connection.CloseAsync();
             return item;
@@ -210,7 +204,7 @@ internal class TaskStoredProcedureRepository : IRepository<TaskEntity>
 
     public async Task DeleteAsync(string id, CancellationToken cancellationToken)
     {
-        using SqlConnection connection = new(_configuration.GetConnectionString("TaskDatabase"));
+        using SqlConnection connection = new(_configuration.GetConnectionString("TaskServiceDb"));
         using var command = new SqlCommand("spDeleteTask", connection);
         command.CommandType = CommandType.StoredProcedure;
         command.Parameters.AddWithValue($"@{nameof(TaskEntity.Id)}", id);
