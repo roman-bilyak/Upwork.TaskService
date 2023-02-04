@@ -4,6 +4,7 @@ using Upwork.TaskService.Tasks;
 namespace Upwork.TaskService.Controllers
 {
     [ApiController]
+    [ApiExplorerSettings(GroupName = "Tasks")]
     [Route("api/Tasks")]
     public class TaskController : ControllerBase
     {
@@ -36,13 +37,13 @@ namespace Upwork.TaskService.Controllers
                 .ToList();
         }
 
-        [HttpGet("{id}")]
-        public async Task<TaskDto> GetByIdAsync(string id, CancellationToken cancellationToken)
+        [HttpGet("{taskId}")]
+        public async Task<TaskDto> GetByIdAsync(string taskId, CancellationToken cancellationToken)
         {
-            TaskEntity? taskEntity = await _taskManager.GetByIdAsync(id, cancellationToken);
+            TaskEntity? taskEntity = await _taskManager.GetByIdAsync(taskId, cancellationToken);
             if (taskEntity is null)
             {
-                throw new EntityNotFoundException(typeof(TaskEntity), id);
+                throw new EntityNotFoundException(typeof(TaskEntity), taskId);
             }
 
             return new TaskDto
@@ -87,12 +88,12 @@ namespace Upwork.TaskService.Controllers
                     };
         }
 
-        [HttpPut("{id}")]
-        public async Task<TaskDto> UpdateAsync(string id, UpdateTaskDto task, CancellationToken cancellationToken)
+        [HttpPut("{taskId}")]
+        public async Task<TaskDto> UpdateAsync(string taskId, UpdateTaskDto task, CancellationToken cancellationToken)
         {
             TaskEntity taskEntity = new()
             {
-                Id = id,
+                Id = taskId,
                 Name = task.Name,
                 Description = task.Description,
                 DueDate = task.DueDate,
@@ -116,10 +117,10 @@ namespace Upwork.TaskService.Controllers
             };
         }
 
-        [HttpDelete("{id}")]
-        public async Task DeleteAsync(string id, CancellationToken cancellationToken)
+        [HttpDelete("{taskId}")]
+        public async Task DeleteAsync(string taskId, CancellationToken cancellationToken)
         {
-            await _taskManager.DeleteAsync(id, cancellationToken);
+            await _taskManager.DeleteAsync(taskId, cancellationToken);
         }
     }
 }
