@@ -1,6 +1,4 @@
-﻿using Upwork.TaskService.Tasks;
-
-namespace Upwork.TaskService.Controllers;
+﻿namespace Upwork.TaskService.Tasks;
 
 public record TaskDto
 {
