@@ -5,13 +5,15 @@ VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Upwork.TaskService.Api", "Upwork.TaskService.Api\Upwork.TaskService.Api.csproj", "{1ADFC302-AFAB-4C94-8A64-D13636B7EFF4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Upwork.TaskService.Domain", "Upwork.TaskService.Domain\Upwork.TaskService.Domain.csproj", "{B5C16FB1-3D51-4A65-AEB7-95DAFF9A5C0F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Upwork.TaskService.Domain", "Upwork.TaskService.Domain\Upwork.TaskService.Domain.csproj", "{B5C16FB1-3D51-4A65-AEB7-95DAFF9A5C0F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Upwork.TaskService.Domain.Shared", "Upwork.TaskService.Domain.Shared\Upwork.TaskService.Domain.Shared.csproj", "{066D2096-E9E8-4937-BB4D-A45CEBB815E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Upwork.TaskService.Domain.Shared", "Upwork.TaskService.Domain.Shared\Upwork.TaskService.Domain.Shared.csproj", "{066D2096-E9E8-4937-BB4D-A45CEBB815E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Upwork.TaskService.Infrastructure", "Upwork.TaskService.Infrastructure\Upwork.TaskService.Infrastructure.csproj", "{CD376FE4-DA4F-4183-94CA-19552AC5EC8A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Upwork.TaskService.Infrastructure", "Upwork.TaskService.Infrastructure\Upwork.TaskService.Infrastructure.csproj", "{CD376FE4-DA4F-4183-94CA-19552AC5EC8A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Upwork.TaskService.Core", "Upwork.TaskService.Core\Upwork.TaskService.Core.csproj", "{88A3E2C5-F663-4233-A1DF-F790FED2B0F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Upwork.TaskService.Core", "Upwork.TaskService.Core\Upwork.TaskService.Core.csproj", "{88A3E2C5-F663-4233-A1DF-F790FED2B0F8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Upwork.TaskService.Application", "Upwork.TaskService.Application\Upwork.TaskService.Application.csproj", "{D5672A51-F8FF-4369-9311-8D43CD8E3F05}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{88A3E2C5-F663-4233-A1DF-F790FED2B0F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{88A3E2C5-F663-4233-A1DF-F790FED2B0F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{88A3E2C5-F663-4233-A1DF-F790FED2B0F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5672A51-F8FF-4369-9311-8D43CD8E3F05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5672A51-F8FF-4369-9311-8D43CD8E3F05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5672A51-F8FF-4369-9311-8D43CD8E3F05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5672A51-F8FF-4369-9311-8D43CD8E3F05}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

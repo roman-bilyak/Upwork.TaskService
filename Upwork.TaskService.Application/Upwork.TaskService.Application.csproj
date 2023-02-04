@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>$(MSBuildProjectName.Replace(" ", "_").Replace(".Application", ""))</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Upwork.TaskService.Domain\Upwork.TaskService.Domain.csproj" />
+    <ProjectReference Include="..\Upwork.TaskService.Infrastructure\Upwork.TaskService.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

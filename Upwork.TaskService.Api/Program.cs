@@ -1,11 +1,8 @@
-using Microsoft.Extensions.Options;
-using Swashbuckle.AspNetCore.Swagger;
 using Upwork.TaskService;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDomainServices();
-builder.Services.AddInfrastructureServices();
+builder.Services.AddApplicationServices();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
