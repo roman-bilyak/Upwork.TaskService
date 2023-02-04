@@ -1,8 +1,6 @@
-﻿using Upwork.TaskService.Tasks;
+﻿namespace Upwork.TaskService.Tasks;
 
-namespace Upwork.TaskService.Controllers;
-
-public record TaskDto
+public class TaskEntity
 {
     public string Id { get; set; } = string.Empty;
 

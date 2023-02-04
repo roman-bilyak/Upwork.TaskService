@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Upwork.TaskService.Domain",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Upwork.TaskService.Domain.Shared", "Upwork.TaskService.Domain.Shared\Upwork.TaskService.Domain.Shared.csproj", "{066D2096-E9E8-4937-BB4D-A45CEBB815E7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Upwork.TaskService.Infrastructure", "Upwork.TaskService.Infrastructure\Upwork.TaskService.Infrastructure.csproj", "{CD376FE4-DA4F-4183-94CA-19552AC5EC8A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Upwork.TaskService.Core", "Upwork.TaskService.Core\Upwork.TaskService.Core.csproj", "{88A3E2C5-F663-4233-A1DF-F790FED2B0F8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{066D2096-E9E8-4937-BB4D-A45CEBB815E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{066D2096-E9E8-4937-BB4D-A45CEBB815E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{066D2096-E9E8-4937-BB4D-A45CEBB815E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD376FE4-DA4F-4183-94CA-19552AC5EC8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD376FE4-DA4F-4183-94CA-19552AC5EC8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD376FE4-DA4F-4183-94CA-19552AC5EC8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD376FE4-DA4F-4183-94CA-19552AC5EC8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88A3E2C5-F663-4233-A1DF-F790FED2B0F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88A3E2C5-F663-4233-A1DF-F790FED2B0F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88A3E2C5-F663-4233-A1DF-F790FED2B0F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88A3E2C5-F663-4233-A1DF-F790FED2B0F8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
