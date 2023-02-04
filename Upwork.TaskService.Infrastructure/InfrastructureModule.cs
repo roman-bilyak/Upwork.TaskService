@@ -3,9 +3,9 @@ using Upwork.TaskService.Tasks;
 
 namespace Upwork.TaskService;
 
-public static class ServiceCollectionExtensions
+public static class InfrastructureModule
 {
-    public static IServiceCollection AddInfrastructureServices(this IServiceCollection services)
+    public static IServiceCollection AddInfrastructureModule(this IServiceCollection services)
     {
         services.AddScoped<IRepository<TaskEntity>, TaskStoredProcedureRepository>();
 

@@ -3,9 +3,9 @@ using Upwork.TaskService.Tasks;
 
 namespace Upwork.TaskService;
 
-public static class ServiceCollectionExtensions
+public static class DomainModule
 {
-    public static IServiceCollection AddDomainServices(this IServiceCollection services)
+    public static IServiceCollection AddDomainModule(this IServiceCollection services)
     {
         services.AddScoped<ITaskManager, TaskManager>();
 

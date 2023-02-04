@@ -2,7 +2,7 @@ using Upwork.TaskService;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddApplicationServices();
+builder.Services.AddApplicationModule();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
