@@ -20,6 +20,6 @@
     <DoNotAlterChangeDataCaptureObjects>False</DoNotAlterChangeDataCaptureObjects>
     <DisableAndReenableDdlTriggers>False</DisableAndReenableDdlTriggers>
     <DropStatisticsNotInSource>False</DropStatisticsNotInSource>
-    <DoNotEvaluateSqlCmdVariables>False</DoNotEvaluateSqlCmdVariables>
+    <DoNotEvaluateSqlCmdVariables>True</DoNotEvaluateSqlCmdVariables>
   </PropertyGroup>
 </Project>

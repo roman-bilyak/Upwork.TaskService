@@ -1,6 +1,15 @@
 ﻿CREATE PROCEDURE [dbo].[spGetTaskById]
-	@param1 int = 0,
-	@param2 int
+	@Id NVARCHAR(50)
 AS
-	SELECT @param1, @param2
+	SELECT
+		[Id],
+		[Name],
+		[Description],
+		[DueDate],
+		[StartDate],
+		[EndDate],
+		[Priority],
+		[Status] 
+	FROM [dbo].[tblTask]
+	WHERE Id = @Id
 RETURN 0
