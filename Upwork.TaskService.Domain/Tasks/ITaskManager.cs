@@ -10,5 +10,5 @@ public interface ITaskManager
 
     Task<TaskEntity> UpdateAsync(TaskEntity task, CancellationToken cancellationToken);
 
-    Task DeleteAsync(TaskEntity task, CancellationToken cancellationToken);
+    Task DeleteAsync(string id, CancellationToken cancellationToken);
 }

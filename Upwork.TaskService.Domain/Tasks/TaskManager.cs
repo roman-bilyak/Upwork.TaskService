@@ -32,8 +32,8 @@ internal class TaskManager : DomainService, ITaskManager
         return await _taskRepository.UpdateAsync(task, cancellationToken);
     }
 
-    public async Task DeleteAsync(TaskEntity task, CancellationToken cancellationToken)
+    public async Task DeleteAsync(string id, CancellationToken cancellationToken)
     {
-        await _taskRepository.DeleteAsync(task, cancellationToken);
+        await _taskRepository.DeleteAsync(id, cancellationToken);
     }
 }

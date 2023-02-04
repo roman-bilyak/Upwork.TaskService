@@ -119,13 +119,7 @@ namespace Upwork.TaskService.Controllers
         [HttpDelete("{id}")]
         public async Task DeleteAsync(string id, CancellationToken cancellationToken)
         {
-            TaskEntity? taskEntity = await _taskManager.GetByIdAsync(id, cancellationToken);
-            if (taskEntity is null)
-            {
-                throw new EntityNotFoundException(typeof(TaskEntity), id);
-            }
-
-            await _taskManager.DeleteAsync(taskEntity, cancellationToken);
+            await _taskManager.DeleteAsync(id, cancellationToken);
         }
     }
 }

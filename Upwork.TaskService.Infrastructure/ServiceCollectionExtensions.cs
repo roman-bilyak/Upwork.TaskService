@@ -7,7 +7,7 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddInfrastructureServices(this IServiceCollection services)
     {
-        services.AddScoped<IRepository<TaskEntity>, TaskEntityRepository>();
+        services.AddScoped<IRepository<TaskEntity>, TaskStoredProcedureRepository>();
 
         return services;
     }
