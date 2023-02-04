@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Upwork.TaskService.Api", "Upwork.TaskService.Api\Upwork.TaskService.Api.csproj", "{1ADFC302-AFAB-4C94-8A64-D13636B7EFF4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Upwork.TaskService.Domain", "Upwork.TaskService.Domain\Upwork.TaskService.Domain.csproj", "{B5C16FB1-3D51-4A65-AEB7-95DAFF9A5C0F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Upwork.TaskService.Domain.Shared", "Upwork.TaskService.Domain.Shared\Upwork.TaskService.Domain.Shared.csproj", "{066D2096-E9E8-4937-BB4D-A45CEBB815E7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1ADFC302-AFAB-4C94-8A64-D13636B7EFF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1ADFC302-AFAB-4C94-8A64-D13636B7EFF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1ADFC302-AFAB-4C94-8A64-D13636B7EFF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1ADFC302-AFAB-4C94-8A64-D13636B7EFF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5C16FB1-3D51-4A65-AEB7-95DAFF9A5C0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5C16FB1-3D51-4A65-AEB7-95DAFF9A5C0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5C16FB1-3D51-4A65-AEB7-95DAFF9A5C0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5C16FB1-3D51-4A65-AEB7-95DAFF9A5C0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{066D2096-E9E8-4937-BB4D-A45CEBB815E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{066D2096-E9E8-4937-BB4D-A45CEBB815E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{066D2096-E9E8-4937-BB4D-A45CEBB815E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{066D2096-E9E8-4937-BB4D-A45CEBB815E7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9FC7D860-8B9A-4AF3-BFBB-60F7A9143C15}
+	EndGlobalSection
+EndGlobal
