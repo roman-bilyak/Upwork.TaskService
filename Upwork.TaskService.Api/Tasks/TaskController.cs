@@ -21,31 +21,31 @@ public class TaskController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<List<TaskDto>> GetAllAsync(CancellationToken cancellationToken)
+    public async Task<List<TaskDto>> GetAllAsync(CancellationToken cancellationToken = default)
     {
         return await _mediator.Send(new GetAllTasksQuery(), cancellationToken);
     }
 
     [HttpGet("{taskId}")]
-    public async Task<TaskDto> GetByIdAsync(string taskId, CancellationToken cancellationToken)
+    public async Task<TaskDto> GetByIdAsync(string taskId, CancellationToken cancellationToken = default)
     {
         return await _mediator.Send(new GetTaskByIdQuery(taskId), cancellationToken);
     }
 
     [HttpPost]
-    public async Task<TaskDto> CreateAsync(CreateTaskDto task, CancellationToken cancellationToken)
+    public async Task<TaskDto> CreateAsync(CreateTaskDto task, CancellationToken cancellationToken = default)
     {
         return await _mediator.Send(new CreateTaskCommand(task), cancellationToken);
     }
 
     [HttpPut("{taskId}")]
-    public async Task<TaskDto> UpdateAsync(string taskId, UpdateTaskDto task, CancellationToken cancellationToken)
+    public async Task<TaskDto> UpdateAsync(string taskId, UpdateTaskDto task, CancellationToken cancellationToken = default)
     {
         return await _mediator.Send(new UpdateTaskCommand(taskId, task), cancellationToken);
     }
 
     [HttpDelete("{taskId}")]
-    public async Task DeleteAsync(string taskId, CancellationToken cancellationToken)
+    public async Task DeleteAsync(string taskId, CancellationToken cancellationToken = default)
     {
         await _mediator.Send(new DeleteTaskCommand(taskId), cancellationToken);
     }
