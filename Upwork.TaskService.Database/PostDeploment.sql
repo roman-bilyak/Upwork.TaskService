@@ -19,7 +19,7 @@ SET @Year = YEAR(GETDATE())
 
 WHILE @Year < YEAR(GETDATE()) + 5
 BEGIN
-    INSERT INTO [dto].[tblHoliday]([Date], [Holiday])
+    INSERT INTO [dbo].[tblHoliday]([Date], [Holiday])
     SELECT [Date], [Holiday]
     FROM [dbo].[fnGetHolidays](@Year)
 

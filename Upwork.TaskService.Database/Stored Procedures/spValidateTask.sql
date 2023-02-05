@@ -13,13 +13,13 @@ AS
     IF @DueDate < DATEADD(day, DATEDIFF(day, 0, GETDATE()), 0)
     BEGIN
         SET @Error  = '''DueDate'' cannot be in the past'
-        ;THROW 1, @Error, 1
+        ;THROW 50100, @Error, 1
     END
 
     IF ([dbo].[fnIsHoliday](@DueDate) = 1)
     BEGIN
         SET @Error  = '''DueDate'' cannot be on a holiday or weekend'
-        ;THROW 1, @Error, 1
+        ;THROW 50200, @Error, 1
     END
 
     DECLARE @MaxDueDateCount INT = 100
@@ -34,6 +34,6 @@ AS
         SET @Error = 'The system doesn''t allow more than '
                 + CAST(@MaxDueDateCount AS VARCHAR(10))
                 + ' High Priority tasks which have the same due date and are not finished'
-        ;THROW 1, @Error, 1
+        ;THROW 50300, @Error, 1
     END
 RETURN 0
