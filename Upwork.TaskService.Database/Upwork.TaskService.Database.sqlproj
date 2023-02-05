@@ -7,7 +7,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
     <ProjectGuid>{cb4acfff-fea1-4054-8596-edb7f7ecc2b0}</ProjectGuid>
-    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql150DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
@@ -58,6 +58,7 @@
     <Folder Include="Properties" />
     <Folder Include="Stored Procedures" />
     <Folder Include="Tables" />
+    <Folder Include="Functions" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Stored Procedures\spGetAllTasks.sql" />
@@ -68,6 +69,12 @@
     <Build Include="Stored Procedures\spDeleteTask.sql" />
     <Build Include="Tables\fxPriority.sql" />
     <Build Include="Tables\fxStatus.sql" />
+    <Build Include="Stored Procedures\spValidateTask.sql" />
+    <Build Include="Tables\tblHoliday.sql" />
+    <Build Include="Functions\fnIsHoliday.sql" />
+    <Build Include="Functions\fnGetHoliday.sql" />
+    <Build Include="Functions\fnShiftHolidayToWorkday.sql" />
+    <Build Include="Functions\fnGetHolidays.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Upwork.TaskService.Database.publish.xml" />

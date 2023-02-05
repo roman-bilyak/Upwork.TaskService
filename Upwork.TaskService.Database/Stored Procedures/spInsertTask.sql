@@ -8,6 +8,16 @@
     @Priority SMALLINT,
     @Status SMALLINT
 AS
+    EXEC [dbo].[spValidateTask]
+        @Id = @Id,
+        @Name = @Name,
+        @Description = @Description,
+        @DueDate = @DueDate,
+        @StartDate = @StartDate,
+        @EndDate = @EndDate,
+        @Priority = @Priority,
+        @Status = @Status
+
     INSERT INTO [dbo].[tblTask]
     (
         [Id],
