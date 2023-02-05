@@ -1,5 +1,7 @@
-﻿using MediatR;
+﻿using FluentValidation;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using Upwork.TaskService.Tasks;
 
 namespace Upwork.TaskService;
 
@@ -9,8 +11,17 @@ public static class ApplicationModule
     {
         services.AddDomainModule();
         services.AddInfrastructureModule();
+        services.AddDataValidation();
 
         services.AddMediatR(typeof(ApplicationModule));
+
+        return services;
+    }
+
+    internal static IServiceCollection AddDataValidation(this IServiceCollection services)
+    {
+        services.AddScoped<IValidator<CreateTaskDto>, CreateTaskDtoValidator>();
+        services.AddScoped<IValidator<UpdateTaskDto>, UpdateTaskDtoValidator>();
 
         return services;
     }

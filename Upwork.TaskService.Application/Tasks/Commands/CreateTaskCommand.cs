@@ -1,4 +1,7 @@
-﻿using MediatR;
+﻿using FluentValidation;
+using FluentValidation.Results;
+using MediatR;
+using DataAnnotationValidationResult = System.ComponentModel.DataAnnotations.ValidationResult;
 
 namespace Upwork.TaskService.Tasks;
 
@@ -16,19 +19,33 @@ public class CreateTaskCommand : IRequest<TaskDto>
     internal class CreateTaskCommandHandler : IRequestHandler<CreateTaskCommand, TaskDto>
     {
         private readonly ITaskManager _taskManager;
+        private readonly IValidator<CreateTaskDto> _validator;
 
         public CreateTaskCommandHandler
         (
-            ITaskManager taskManager
+            ITaskManager taskManager,
+            IValidator<CreateTaskDto> validator
         )
         {
             ArgumentNullException.ThrowIfNull(taskManager, nameof(taskManager));
+            ArgumentNullException.ThrowIfNull(validator, nameof(validator));
 
             _taskManager = taskManager;
+            _validator = validator;
         }
 
         public async Task<TaskDto> Handle(CreateTaskCommand request, CancellationToken cancellationToken)
         {
+            ValidationResult validationResult = await _validator.ValidateAsync(request.Model, cancellationToken);
+            if (!validationResult.IsValid)
+            {
+                var errors = validationResult.Errors
+                    .Select(x => new DataAnnotationValidationResult(x.ErrorMessage, new[] { x.PropertyName }))
+                    .ToArray();
+
+                throw new DataValidationException("ModelState is not valid! See ValidationErrors for details.", errors);
+            }
+
             TaskEntity taskEntity = new()
             {
                 Id = Guid.NewGuid().ToString(),
