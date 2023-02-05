@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using Microsoft.VisualBasic;
 
 namespace Upwork.TaskService.Tasks;
 
@@ -15,9 +14,7 @@ internal class CreateTaskDtoValidator : AbstractValidator<CreateTaskDto>
             .NotEmpty()
             .MaximumLength(500);
 
-        Transform(x => x.DueDate, x => x.Date)
-            .GreaterThanOrEqualTo(DateTime.Today)
-            .WithMessage($"'{nameof(CreateTaskDto.DueDate)}' cannot be in the past");
+        Transform(x => x.DueDate, x => x.Date);
 
         Transform(x => x.StartDate, x => x.Date);
 

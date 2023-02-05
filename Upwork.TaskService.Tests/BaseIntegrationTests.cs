@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 
-namespace Upwork.TaskService.Tasks;
+namespace Upwork.TaskService;
 
 internal abstract class BaseIntegrationTests
 {
