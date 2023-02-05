@@ -1,10 +1,14 @@
 using Upwork.TaskService;
+using Upwork.TaskService.Exceptions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddApplicationModule();
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(x =>
+{
+    x.Filters.Add<ExceptionActionFilter>();
+});
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
