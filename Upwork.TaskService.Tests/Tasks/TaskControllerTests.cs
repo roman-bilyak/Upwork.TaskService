@@ -313,14 +313,14 @@ internal class TaskControllerTests : BaseIntegrationTests
     }
 
     [Test]
-    public void Create_ShouldNotCreateTaskWithInvalidData_DueDateWeekday_Test()
+    public void Create_ShouldNotCreateTaskWithInvalidData_DueDateWeekend_Test()
     {
         // Arrange
         CreateTaskDto createTaskDto = new()
         {
             Name = GetRandomName(),
             Description = GetRandomDescription(),
-            DueDate = GetFutureWeekdayDate(),
+            DueDate = GetFutureWeekendDate(),
             StartDate = GetFutureRandomDate(),
             EndDate = GetFutureRandomDate(),
             Priority = GetRandomPriority(TaskPriorityEnum.Medium, TaskPriorityEnum.Low),
@@ -738,7 +738,7 @@ internal class TaskControllerTests : BaseIntegrationTests
     }
 
     [Test]
-    public async Task Update_ShouldNotUpdateTaskWithInvalidData_DueDateWeekday_Test()
+    public async Task Update_ShouldNotUpdateTaskWithInvalidData_DueDateWeekend_Test()
     {
         // Arrange
         CreateTaskDto createTaskDto = new()
@@ -758,7 +758,7 @@ internal class TaskControllerTests : BaseIntegrationTests
         {
             Name = GetRandomName(),
             Description = GetRandomDescription(),
-            DueDate = GetFutureWeekdayDate(),
+            DueDate = GetFutureWeekendDate(),
             StartDate = GetFutureRandomDate(),
             EndDate = GetFutureRandomDate(),
             Priority = GetRandomPriority(TaskPriorityEnum.Medium, TaskPriorityEnum.Low),
@@ -976,7 +976,7 @@ internal class TaskControllerTests : BaseIntegrationTests
         return new DateTime(2025, 7, 4); // Friday
     }
 
-    private static DateTime GetFutureWeekdayDate()
+    private static DateTime GetFutureWeekendDate()
     {
         return new DateTime(2025, 7, 6); // Sunday
     }
