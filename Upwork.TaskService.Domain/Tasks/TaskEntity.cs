@@ -2,6 +2,10 @@
 
 public class TaskEntity
 {
+    public const int MaximumNameLength = 100;
+
+    public const int MaximumDescriptionLength = 500;
+
     public string Id { get; set; } = string.Empty;
 
     public string Name { get; set; } = string.Empty;

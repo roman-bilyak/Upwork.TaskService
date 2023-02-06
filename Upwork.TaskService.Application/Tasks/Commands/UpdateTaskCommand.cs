@@ -50,17 +50,20 @@ public class UpdateTaskCommand : IRequest<TaskDto>
                 throw new DataValidationException("ModelState is not valid! See ValidationErrors for details.", errors);
             }
 
-            TaskEntity taskEntity = new()
+            TaskEntity? taskEntity = await _taskManager.GetByIdAsync(request.Id, cancellationToken);
+            if (taskEntity is null)
             {
-                Id = request.Id,
-                Name = request.Model.Name,
-                Description = request.Model.Description,
-                DueDate = request.Model.DueDate,
-                StartDate = request.Model.StartDate,
-                EndDate = request.Model.EndDate,
-                Priority = request.Model.Priority,
-                Status = request.Model.Status,
-            };
+                throw new EntityNotFoundException(typeof(TaskEntity), request.Id);
+            }
+
+            taskEntity.Name = request.Model.Name;
+            taskEntity.Description = request.Model.Description;
+            taskEntity.DueDate = request.Model.DueDate;
+            taskEntity.StartDate = request.Model.StartDate;
+            taskEntity.EndDate = request.Model.EndDate;
+            taskEntity.Priority = request.Model.Priority;
+            taskEntity.Status = request.Model.Status;
+
             taskEntity = await _taskManager.UpdateAsync(taskEntity, cancellationToken);
 
             return new TaskDto

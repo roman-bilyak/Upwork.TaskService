@@ -2,5 +2,5 @@
     @Id NVARCHAR(50)
 AS
     DELETE FROM [dbo].[tblTask]
-    WHERE Id = @Id
+    WHERE [Id] = @Id
 RETURN 0

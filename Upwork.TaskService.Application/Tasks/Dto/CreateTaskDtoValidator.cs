@@ -8,11 +8,11 @@ internal class CreateTaskDtoValidator : AbstractValidator<CreateTaskDto>
     {
         Transform(x => x.Name, x => x.Trim())
             .NotEmpty()
-            .MaximumLength(100);
+            .MaximumLength(TaskEntity.MaximumNameLength);
 
         Transform(x => x.Description, x => x.Trim())
             .NotEmpty()
-            .MaximumLength(500);
+            .MaximumLength(TaskEntity.MaximumDescriptionLength);
 
         Transform(x => x.DueDate, x => x.Date);
 

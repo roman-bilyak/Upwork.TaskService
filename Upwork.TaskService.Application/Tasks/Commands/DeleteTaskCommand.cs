@@ -30,6 +30,11 @@ public class DeleteTaskCommand : IRequest
 
         public async Task<Unit> Handle(DeleteTaskCommand request, CancellationToken cancellationToken)
         {
+            TaskEntity? taskEntity = await _taskManager.GetByIdAsync(request.Id, cancellationToken);
+            if (taskEntity is null)
+            {
+                throw new EntityNotFoundException(typeof(TaskEntity), request.Id);
+            }
             await _taskManager.DeleteAsync(request.Id, cancellationToken);
             return Unit.Value;
         }
