@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using AutoMapper;
+using FluentValidation;
 using FluentValidation.Results;
 using MediatR;
 using DataAnnotationValidationResult = System.ComponentModel.DataAnnotations.ValidationResult;
@@ -20,18 +21,22 @@ public class CreateTaskCommand : IRequest<TaskDto>
     {
         private readonly ITaskManager _taskManager;
         private readonly IValidator<CreateTaskDto> _validator;
+        private readonly IMapper _mapper;
 
         public CreateTaskCommandHandler
         (
             ITaskManager taskManager,
-            IValidator<CreateTaskDto> validator
+            IValidator<CreateTaskDto> validator,
+            IMapper mapper
         )
         {
             ArgumentNullException.ThrowIfNull(taskManager, nameof(taskManager));
             ArgumentNullException.ThrowIfNull(validator, nameof(validator));
+            ArgumentNullException.ThrowIfNull(mapper, nameof(mapper));
 
             _taskManager = taskManager;
             _validator = validator;
+            _mapper = mapper;
         }
 
         public async Task<TaskDto> Handle(CreateTaskCommand request, CancellationToken cancellationToken)
@@ -46,30 +51,10 @@ public class CreateTaskCommand : IRequest<TaskDto>
                 throw new DataValidationException(errors);
             }
 
-            TaskEntity taskEntity = new()
-            {
-                Id = Guid.NewGuid().ToString(),
-                Name = request.Model.Name.Trim(),
-                Description = request.Model.Description.Trim(),
-                DueDate = request.Model.DueDate.Date,
-                StartDate = request.Model.StartDate.Date,
-                EndDate = request.Model.EndDate.Date,
-                Priority = request.Model.Priority,
-                Status = request.Model.Status,
-            };
+            TaskEntity taskEntity = _mapper.Map<TaskEntity>(request.Model);
             taskEntity = await _taskManager.AddAsync(taskEntity, cancellationToken);
 
-            return new TaskDto
-            {
-                Id = taskEntity.Id,
-                Name = taskEntity.Name,
-                Description = taskEntity.Description,
-                DueDate = taskEntity.DueDate,
-                StartDate = taskEntity.StartDate,
-                EndDate = taskEntity.EndDate,
-                Priority = taskEntity.Priority,
-                Status = taskEntity.Status,
-            };
+            return _mapper.Map<TaskDto>(taskEntity);
         }
     }
 }

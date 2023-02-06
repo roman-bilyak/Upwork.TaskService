@@ -12,6 +12,7 @@ public static class ApplicationModule
         services.AddDomainModule();
         services.AddInfrastructureModule();
         services.AddDataValidation();
+        services.AddAutoMapper(typeof(ApplicationModule));
 
         services.AddMediatR(typeof(ApplicationModule));
 

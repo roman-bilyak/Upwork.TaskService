@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 
 namespace Upwork.TaskService.Tasks;
 
@@ -16,15 +17,19 @@ public class GetTaskByIdQuery : IRequest<TaskDto>
     internal class GetTaskByIdQueryHandler : IRequestHandler<GetTaskByIdQuery, TaskDto>
     {
         private readonly ITaskManager _taskManager;
+        private readonly IMapper _mapper;
 
         public GetTaskByIdQueryHandler
         (
-            ITaskManager taskManager
+            ITaskManager taskManager,
+            IMapper mapper
         )
         {
             ArgumentNullException.ThrowIfNull(taskManager, nameof(taskManager));
+            ArgumentNullException.ThrowIfNull(mapper, nameof(mapper));
 
             _taskManager = taskManager;
+            _mapper = mapper;
         }
 
         public async Task<TaskDto> Handle(GetTaskByIdQuery request, CancellationToken cancellationToken)
@@ -35,17 +40,7 @@ public class GetTaskByIdQuery : IRequest<TaskDto>
                 throw new EntityNotFoundException(typeof(TaskEntity), request.Id);
             }
 
-            return new TaskDto
-            {
-                Id = taskEntity.Id,
-                Name = taskEntity.Name,
-                Description = taskEntity.Description,
-                DueDate = taskEntity.DueDate,
-                StartDate = taskEntity.StartDate,
-                EndDate = taskEntity.EndDate,
-                Priority = taskEntity.Priority,
-                Status = taskEntity.Status,
-            };
+            return _mapper.Map<TaskDto>(taskEntity);
         }
     }
 }

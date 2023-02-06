@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 
 namespace Upwork.TaskService.Tasks;
 
@@ -7,33 +8,24 @@ public class GetAllTasksQuery : IRequest<List<TaskDto>>
     internal class GetAllTasksQueryHandler : IRequestHandler<GetAllTasksQuery, List<TaskDto>>
     {
         private readonly ITaskManager _taskManager;
+        private readonly IMapper _mapper;
 
         public GetAllTasksQueryHandler
         (
-            ITaskManager taskManager
+            ITaskManager taskManager,
+            IMapper mapper
         )
         {
             ArgumentNullException.ThrowIfNull(taskManager, nameof(taskManager));
+            ArgumentNullException.ThrowIfNull(mapper, nameof(mapper));
 
             _taskManager = taskManager;
+            _mapper = mapper;
         }
 
         public async Task<List<TaskDto>> Handle(GetAllTasksQuery request, CancellationToken cancellationToken)
         {
-            return (await _taskManager.GetAllAsync(cancellationToken))
-               .Select(x =>
-                   new TaskDto
-                   {
-                       Id = x.Id,
-                       Name = x.Name,
-                       Description = x.Description,
-                       DueDate = x.DueDate,
-                       StartDate = x.StartDate,
-                       EndDate = x.EndDate,
-                       Priority = x.Priority,
-                       Status = x.Status,
-                   })
-               .ToList();
+            return _mapper.Map<List<TaskDto>>(await _taskManager.GetAllAsync(cancellationToken));
         }
     }
 }
