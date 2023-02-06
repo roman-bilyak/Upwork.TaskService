@@ -33,6 +33,8 @@ Set values for **ConnectionStrings.TaskServiceDb** key:
 3. Click 'Run Tests' option from context menu.
 3. Open '*Test Explorer*' to see the tests running progress (Visual Studio: menu Test → Test Explorer).
 
+*Note: I used NUnit framework for writing unit tests.*
+
 ## Tools and libraries
 1. Visual Studio Community 2022 v17.4.4
 2. SQL Server Management Studio v15.0.18206.0
@@ -43,5 +45,5 @@ Set values for **ConnectionStrings.TaskServiceDb** key:
 7. FluentValidation v11.4.0
 8. AutoMapper v12.0.1
 
-## To do
+## To Do
 1. Optimaze population of tblHoliday table.
