@@ -385,14 +385,18 @@ internal class TaskControllerTests : BaseIntegrationTests
     [Test]
     public async Task Create_ShouldNotCreateTaskWithInvalidData_DueDateMaxNotFinished_Test()
     {
-        // Arrange    
-        for (int i = 0; i < 100; i++)
+        // Arrange
+        DateTime testDueDate = new DateTime(2025, 1, 3);
+        List<TaskDto> tasks = await _taskController.GetAllAsync();
+        int dueDateTasksCount = tasks.Count(x => x.DueDate == testDueDate && x.Priority == TaskPriorityEnum.High && x.Status != TaskStatusEnum.Finished);
+
+        for (int i = 0; i < 100 - dueDateTasksCount; i++)
         {
             CreateTaskDto createTaskDto = new()
             {
                 Name = GetRandomName(),
                 Description = GetRandomDescription(),
-                DueDate = new DateTime(2025, 1, 3),
+                DueDate = testDueDate,
                 StartDate = GetFutureRandomDate(),
                 EndDate = GetFutureRandomDate(),
                 Priority = TaskPriorityEnum.High,
@@ -406,7 +410,7 @@ internal class TaskControllerTests : BaseIntegrationTests
         {
             Name = GetRandomName(),
             Description = GetRandomDescription(),
-            DueDate = new DateTime(2025, 1, 3),
+            DueDate = testDueDate,
             StartDate = GetFutureRandomDate(),
             EndDate = GetFutureRandomDate(),
             Priority = TaskPriorityEnum.High,
@@ -828,8 +832,12 @@ internal class TaskControllerTests : BaseIntegrationTests
     [Test]
     public async Task Update_ShouldNotUpdateTaskWithInvalidData_DueDateMaxNotFinished_Test()
     {
-        // Arrange    
-        for (int i = 0; i < 100; i++)
+        // Arrange
+        DateTime testDueDate = new DateTime(2025, 1, 3);
+        List<TaskDto> tasks = await _taskController.GetAllAsync();
+        int dueDateTasksCount = tasks.Count(x => x.DueDate == testDueDate && x.Priority == TaskPriorityEnum.High && x.Status != TaskStatusEnum.Finished);
+
+        for (int i = 0; i < 100 - dueDateTasksCount; i++)
         {
             CreateTaskDto createTaskDto = new()
             {
@@ -881,7 +889,7 @@ internal class TaskControllerTests : BaseIntegrationTests
         Assert.Multiple(() =>
         {
             Assert.That(dataValidationException.Errors[0].MemberNames.ElementAt(0), Is.EqualTo(nameof(UpdateTaskDto.DueDate)));
-            Assert.That(dataValidationException.Errors[0].ErrorMessage, Is.EqualTo($"The system doesn''t allow more than 100 High Priority tasks which have the same due date and are not finished"));
+            Assert.That(dataValidationException.Errors[0].ErrorMessage, Is.EqualTo($"The system doesn't allow more than 100 High Priority tasks which have the same due date and are not finished"));
         });
     }
 
