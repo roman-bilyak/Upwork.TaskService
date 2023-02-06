@@ -386,7 +386,7 @@ internal class TaskControllerTests : BaseIntegrationTests
     public async Task Create_ShouldNotCreateTaskWithInvalidData_DueDateMaxNotFinished_Test()
     {
         // Arrange
-        DateTime testDueDate = new DateTime(2025, 1, 3);
+        DateTime testDueDate = new(2025, 1, 3);
         List<TaskDto> tasks = await _taskController.GetAllAsync();
         int dueDateTasksCount = tasks.Count(x => x.DueDate == testDueDate && x.Priority == TaskPriorityEnum.High && x.Status != TaskStatusEnum.Finished);
 
@@ -833,7 +833,7 @@ internal class TaskControllerTests : BaseIntegrationTests
     public async Task Update_ShouldNotUpdateTaskWithInvalidData_DueDateMaxNotFinished_Test()
     {
         // Arrange
-        DateTime testDueDate = new DateTime(2025, 1, 3);
+        DateTime testDueDate = new(2025, 1, 3);
         List<TaskDto> tasks = await _taskController.GetAllAsync();
         int dueDateTasksCount = tasks.Count(x => x.DueDate == testDueDate && x.Priority == TaskPriorityEnum.High && x.Status != TaskStatusEnum.Finished);
 
