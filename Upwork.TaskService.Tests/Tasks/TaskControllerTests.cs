@@ -22,9 +22,9 @@ internal class TaskControllerTests : BaseIntegrationTests
         {
             Name = GetRandomName(),
             Description = GetRandomDescription(),
-            DueDate = GetValidDueDate(),
-            StartDate = GetRandomNextDate(),
-            EndDate = GetRandomNextDate(),
+            DueDate = GetFutureWorkDate(),
+            StartDate = GetFutureRandomDate(),
+            EndDate = GetFutureRandomDate(),
             Priority = TaskPriorityEnum.Low,
             Status = TaskStatusEnum.New,
         };
@@ -60,9 +60,9 @@ internal class TaskControllerTests : BaseIntegrationTests
         {
             Name = GetRandomName(),
             Description = GetRandomDescription(),
-            DueDate = GetValidDueDate(),
-            StartDate = GetRandomNextDate(),
-            EndDate = GetRandomNextDate(),
+            DueDate = GetFutureWorkDate(),
+            StartDate = GetFutureRandomDate(),
+            EndDate = GetFutureRandomDate(),
             Priority = TaskPriorityEnum.Low,
             Status = TaskStatusEnum.New,
         };
@@ -112,9 +112,9 @@ internal class TaskControllerTests : BaseIntegrationTests
         {
             Name = GetRandomName(),
             Description = GetRandomDescription(),
-            DueDate = GetValidDueDate(),
-            StartDate = GetRandomNextDate(),
-            EndDate = GetRandomNextDate(),
+            DueDate = GetFutureWorkDate(),
+            StartDate = GetFutureRandomDate(),
+            EndDate = GetFutureRandomDate(),
             Priority = TaskPriorityEnum.Low,
             Status = TaskStatusEnum.New,
         };
@@ -145,9 +145,9 @@ internal class TaskControllerTests : BaseIntegrationTests
         {
             Name = string.Empty,
             Description = GetRandomDescription(),
-            DueDate = GetValidDueDate(),
-            StartDate = GetRandomNextDate(),
-            EndDate = GetRandomNextDate(),
+            DueDate = GetFutureWorkDate(),
+            StartDate = GetFutureRandomDate(),
+            EndDate = GetFutureRandomDate(),
             Priority = TaskPriorityEnum.Low,
             Status = TaskStatusEnum.New,
         };
@@ -180,9 +180,9 @@ internal class TaskControllerTests : BaseIntegrationTests
         {
             Name = GetRandomName(),
             Description = string.Empty,
-            DueDate = GetValidDueDate(),
-            StartDate = GetRandomNextDate(),
-            EndDate = GetRandomNextDate(),
+            DueDate = GetFutureWorkDate(),
+            StartDate = GetFutureRandomDate(),
+            EndDate = GetFutureRandomDate(),
             Priority = TaskPriorityEnum.Low,
             Status = TaskStatusEnum.New,
         };
@@ -215,9 +215,9 @@ internal class TaskControllerTests : BaseIntegrationTests
         {
             Name = GetRandomName(TaskEntity.MaximumNameLength + 1, TaskEntity.MaximumNameLength + 10),
             Description = GetRandomDescription(),
-            DueDate = GetValidDueDate(),
-            StartDate = GetRandomNextDate(),
-            EndDate = GetRandomNextDate(),
+            DueDate = GetFutureWorkDate(),
+            StartDate = GetFutureRandomDate(),
+            EndDate = GetFutureRandomDate(),
             Priority = TaskPriorityEnum.Low,
             Status = TaskStatusEnum.New,
         };
@@ -250,9 +250,9 @@ internal class TaskControllerTests : BaseIntegrationTests
         {
             Name = GetRandomName(),
             Description = GetRandomDescription(TaskEntity.MaximumDescriptionLength + 1, TaskEntity.MaximumDescriptionLength + 10),
-            DueDate = GetValidDueDate(),
-            StartDate = GetRandomNextDate(),
-            EndDate = GetRandomNextDate(),
+            DueDate = GetFutureWorkDate(),
+            StartDate = GetFutureRandomDate(),
+            EndDate = GetFutureRandomDate(),
             Priority = TaskPriorityEnum.Low,
             Status = TaskStatusEnum.New,
         };
@@ -285,9 +285,9 @@ internal class TaskControllerTests : BaseIntegrationTests
         {
             Name = GetRandomName(),
             Description = GetRandomDescription(),
-            DueDate = GetRandomPastDate(),
-            StartDate = GetRandomNextDate(),
-            EndDate = GetRandomNextDate(),
+            DueDate = GetPastWorkDate(),
+            StartDate = GetFutureRandomDate(),
+            EndDate = GetFutureRandomDate(),
             Priority = TaskPriorityEnum.Low,
             Status = TaskStatusEnum.New,
         };
@@ -320,9 +320,9 @@ internal class TaskControllerTests : BaseIntegrationTests
         {
             Name = GetRandomName(),
             Description = GetRandomDescription(),
-            DueDate = GetRandomNextWeekday(),
-            StartDate = GetRandomNextDate(),
-            EndDate = GetRandomNextDate(),
+            DueDate = GetFutureWeekdayDate(),
+            StartDate = GetFutureRandomDate(),
+            EndDate = GetFutureRandomDate(),
             Priority = TaskPriorityEnum.Low,
             Status = TaskStatusEnum.New,
         };
@@ -355,9 +355,9 @@ internal class TaskControllerTests : BaseIntegrationTests
         {
             Name = GetRandomName(),
             Description = GetRandomDescription(),
-            DueDate = GetHolidayDate(),
-            StartDate = GetRandomNextDate(),
-            EndDate = GetRandomNextDate(),
+            DueDate = GetFutureHolidayDate(),
+            StartDate = GetFutureRandomDate(),
+            EndDate = GetFutureRandomDate(),
             Priority = TaskPriorityEnum.Low,
             Status = TaskStatusEnum.New,
         };
@@ -393,8 +393,8 @@ internal class TaskControllerTests : BaseIntegrationTests
                 Name = GetRandomName(),
                 Description = GetRandomDescription(),
                 DueDate = new DateTime(2025, 1, 3),
-                StartDate = GetRandomNextDate(),
-                EndDate = GetRandomNextDate(),
+                StartDate = GetFutureRandomDate(),
+                EndDate = GetFutureRandomDate(),
                 Priority = TaskPriorityEnum.High,
                 Status = TaskStatusEnum.InProgress,
             };
@@ -407,8 +407,8 @@ internal class TaskControllerTests : BaseIntegrationTests
             Name = GetRandomName(),
             Description = GetRandomDescription(),
             DueDate = new DateTime(2025, 1, 3),
-            StartDate = GetRandomNextDate(),
-            EndDate = GetRandomNextDate(),
+            StartDate = GetFutureRandomDate(),
+            EndDate = GetFutureRandomDate(),
             Priority = TaskPriorityEnum.High,
             Status = TaskStatusEnum.InProgress,
         };
@@ -439,9 +439,9 @@ internal class TaskControllerTests : BaseIntegrationTests
         {
             Name = GetRandomName(),
             Description = GetRandomDescription(),
-            DueDate = GetValidDueDate(),
-            StartDate = GetRandomNextDate(),
-            EndDate = GetRandomNextDate(),
+            DueDate = GetFutureWorkDate(),
+            StartDate = GetFutureRandomDate(),
+            EndDate = GetFutureRandomDate(),
             Priority = TaskPriorityEnum.Low,
             Status = TaskStatusEnum.New,
         };
@@ -452,9 +452,9 @@ internal class TaskControllerTests : BaseIntegrationTests
         {
             Name = GetRandomName(),
             Description = GetRandomDescription(),
-            DueDate = GetValidDueDate(),
-            StartDate = GetRandomNextDate(),
-            EndDate = GetRandomNextDate(),
+            DueDate = GetFutureWorkDate(),
+            StartDate = GetFutureRandomDate(),
+            EndDate = GetFutureRandomDate(),
             Priority = TaskPriorityEnum.Medium,
             Status = TaskStatusEnum.InProgress,
         };
@@ -486,9 +486,9 @@ internal class TaskControllerTests : BaseIntegrationTests
         {
             Name = GetRandomName(),
             Description = GetRandomDescription(),
-            DueDate = GetValidDueDate(),
-            StartDate = GetRandomNextDate(),
-            EndDate = GetRandomNextDate(),
+            DueDate = GetFutureWorkDate(),
+            StartDate = GetFutureRandomDate(),
+            EndDate = GetFutureRandomDate(),
             Priority = TaskPriorityEnum.Medium,
             Status = TaskStatusEnum.InProgress,
         };
@@ -511,9 +511,9 @@ internal class TaskControllerTests : BaseIntegrationTests
         {
             Name = GetRandomName(),
             Description = GetRandomDescription(),
-            DueDate = GetValidDueDate(),
-            StartDate = GetRandomNextDate(),
-            EndDate = GetRandomNextDate(),
+            DueDate = GetFutureWorkDate(),
+            StartDate = GetFutureRandomDate(),
+            EndDate = GetFutureRandomDate(),
             Priority = TaskPriorityEnum.Low,
             Status = TaskStatusEnum.New,
         };
@@ -524,9 +524,9 @@ internal class TaskControllerTests : BaseIntegrationTests
         {
             Name = string.Empty,
             Description = GetRandomDescription(),
-            DueDate = GetValidDueDate(),
-            StartDate = GetRandomNextDate(),
-            EndDate = GetRandomNextDate(),
+            DueDate = GetFutureWorkDate(),
+            StartDate = GetFutureRandomDate(),
+            EndDate = GetFutureRandomDate(),
             Priority = TaskPriorityEnum.Medium,
             Status = TaskStatusEnum.InProgress,
         };
@@ -557,9 +557,9 @@ internal class TaskControllerTests : BaseIntegrationTests
         {
             Name = GetRandomName(),
             Description = GetRandomDescription(),
-            DueDate = GetValidDueDate(),
-            StartDate = GetRandomNextDate(),
-            EndDate = GetRandomNextDate(),
+            DueDate = GetFutureWorkDate(),
+            StartDate = GetFutureRandomDate(),
+            EndDate = GetFutureRandomDate(),
             Priority = TaskPriorityEnum.Low,
             Status = TaskStatusEnum.New,
         };
@@ -570,9 +570,9 @@ internal class TaskControllerTests : BaseIntegrationTests
         {
             Name = GetRandomName(),
             Description = string.Empty,
-            DueDate = GetValidDueDate(),
-            StartDate = GetRandomNextDate(),
-            EndDate = GetRandomNextDate(),
+            DueDate = GetFutureWorkDate(),
+            StartDate = GetFutureRandomDate(),
+            EndDate = GetFutureRandomDate(),
             Priority = TaskPriorityEnum.Medium,
             Status = TaskStatusEnum.InProgress,
         };
@@ -603,9 +603,9 @@ internal class TaskControllerTests : BaseIntegrationTests
         {
             Name = GetRandomName(),
             Description = GetRandomDescription(),
-            DueDate = GetValidDueDate(),
-            StartDate = GetRandomNextDate(),
-            EndDate = GetRandomNextDate(),
+            DueDate = GetFutureWorkDate(),
+            StartDate = GetFutureRandomDate(),
+            EndDate = GetFutureRandomDate(),
             Priority = TaskPriorityEnum.Low,
             Status = TaskStatusEnum.New,
         };
@@ -649,9 +649,9 @@ internal class TaskControllerTests : BaseIntegrationTests
         {
             Name = GetRandomName(),
             Description = GetRandomDescription(),
-            DueDate = GetValidDueDate(),
-            StartDate = GetRandomNextDate(),
-            EndDate = GetRandomNextDate(),
+            DueDate = GetFutureWorkDate(),
+            StartDate = GetFutureRandomDate(),
+            EndDate = GetFutureRandomDate(),
             Priority = TaskPriorityEnum.Low,
             Status = TaskStatusEnum.New,
         };
@@ -662,9 +662,9 @@ internal class TaskControllerTests : BaseIntegrationTests
         {
             Name = GetRandomName(),
             Description = GetRandomDescription(TaskEntity.MaximumDescriptionLength + 1, TaskEntity.MaximumDescriptionLength + 10),
-            DueDate = GetValidDueDate(),
-            StartDate = GetRandomNextDate(),
-            EndDate = GetRandomNextDate(),
+            DueDate = GetFutureWorkDate(),
+            StartDate = GetFutureRandomDate(),
+            EndDate = GetFutureRandomDate(),
             Priority = TaskPriorityEnum.Medium,
             Status = TaskStatusEnum.InProgress,
         };
@@ -695,9 +695,9 @@ internal class TaskControllerTests : BaseIntegrationTests
         {
             Name = GetRandomName(),
             Description = GetRandomDescription(),
-            DueDate = GetValidDueDate(),
-            StartDate = GetRandomNextDate(),
-            EndDate = GetRandomNextDate(),
+            DueDate = GetFutureWorkDate(),
+            StartDate = GetFutureRandomDate(),
+            EndDate = GetFutureRandomDate(),
             Priority = TaskPriorityEnum.Low,
             Status = TaskStatusEnum.New,
         };
@@ -708,9 +708,9 @@ internal class TaskControllerTests : BaseIntegrationTests
         {
             Name = GetRandomName(),
             Description = GetRandomDescription(),
-            DueDate = GetRandomPastDate(),
-            StartDate = GetRandomNextDate(),
-            EndDate = GetRandomNextDate(),
+            DueDate = GetPastWorkDate(),
+            StartDate = GetFutureRandomDate(),
+            EndDate = GetFutureRandomDate(),
             Priority = TaskPriorityEnum.Medium,
             Status = TaskStatusEnum.InProgress,
         };
@@ -741,9 +741,9 @@ internal class TaskControllerTests : BaseIntegrationTests
         {
             Name = GetRandomName(),
             Description = GetRandomDescription(),
-            DueDate = GetRandomNextDate(),
-            StartDate = GetRandomNextDate(),
-            EndDate = GetRandomNextDate(),
+            DueDate = GetFutureRandomDate(),
+            StartDate = GetFutureRandomDate(),
+            EndDate = GetFutureRandomDate(),
             Priority = TaskPriorityEnum.Low,
             Status = TaskStatusEnum.New,
         };
@@ -754,9 +754,9 @@ internal class TaskControllerTests : BaseIntegrationTests
         {
             Name = GetRandomName(),
             Description = GetRandomDescription(),
-            DueDate = GetRandomNextWeekday(),
-            StartDate = GetRandomNextDate(),
-            EndDate = GetRandomNextDate(),
+            DueDate = GetFutureWeekdayDate(),
+            StartDate = GetFutureRandomDate(),
+            EndDate = GetFutureRandomDate(),
             Priority = TaskPriorityEnum.Medium,
             Status = TaskStatusEnum.InProgress,
         };
@@ -787,9 +787,9 @@ internal class TaskControllerTests : BaseIntegrationTests
         {
             Name = GetRandomName(),
             Description = GetRandomDescription(),
-            DueDate = GetHolidayDate(),
-            StartDate = GetRandomNextDate(),
-            EndDate = GetRandomNextDate(),
+            DueDate = GetFutureWorkDate(),
+            StartDate = GetFutureRandomDate(),
+            EndDate = GetFutureRandomDate(),
             Priority = TaskPriorityEnum.Low,
             Status = TaskStatusEnum.New,
         };
@@ -800,9 +800,9 @@ internal class TaskControllerTests : BaseIntegrationTests
         {
             Name = GetRandomName(),
             Description = GetRandomDescription(),
-            DueDate = GetRandomNextWeekday(),
-            StartDate = GetRandomNextDate(),
-            EndDate = GetRandomNextDate(),
+            DueDate = GetFutureHolidayDate(),
+            StartDate = GetFutureRandomDate(),
+            EndDate = GetFutureRandomDate(),
             Priority = TaskPriorityEnum.Medium,
             Status = TaskStatusEnum.InProgress,
         };
@@ -836,8 +836,8 @@ internal class TaskControllerTests : BaseIntegrationTests
                 Name = GetRandomName(),
                 Description = GetRandomDescription(),
                 DueDate = new DateTime(2025, 1, 3),
-                StartDate = GetRandomNextDate(),
-                EndDate = GetRandomNextDate(),
+                StartDate = GetFutureRandomDate(),
+                EndDate = GetFutureRandomDate(),
                 Priority = TaskPriorityEnum.High,
                 Status = TaskStatusEnum.InProgress,
             };
@@ -848,8 +848,8 @@ internal class TaskControllerTests : BaseIntegrationTests
             Name = GetRandomName(),
             Description = GetRandomDescription(),
             DueDate = new DateTime(2025, 1, 6),
-            StartDate = GetRandomNextDate(),
-            EndDate = GetRandomNextDate(),
+            StartDate = GetFutureRandomDate(),
+            EndDate = GetFutureRandomDate(),
             Priority = TaskPriorityEnum.High,
             Status = TaskStatusEnum.InProgress,
         };
@@ -861,8 +861,8 @@ internal class TaskControllerTests : BaseIntegrationTests
             Name = GetRandomName(),
             Description = GetRandomDescription(),
             DueDate = new DateTime(2025, 1, 3),
-            StartDate = GetRandomNextDate(),
-            EndDate = GetRandomNextDate(),
+            StartDate = GetFutureRandomDate(),
+            EndDate = GetFutureRandomDate(),
             Priority = TaskPriorityEnum.High,
             Status = TaskStatusEnum.InProgress,
         };
@@ -893,9 +893,9 @@ internal class TaskControllerTests : BaseIntegrationTests
         {
             Name = GetRandomName(),
             Description = GetRandomDescription(),
-            DueDate = GetValidDueDate(),
-            StartDate = GetRandomNextDate(),
-            EndDate = GetRandomNextDate(),
+            DueDate = GetFutureWorkDate(),
+            StartDate = GetFutureRandomDate(),
+            EndDate = GetFutureRandomDate(),
             Priority = TaskPriorityEnum.Low,
             Status = TaskStatusEnum.New,
         };
@@ -952,36 +952,29 @@ internal class TaskControllerTests : BaseIntegrationTests
             .Select(s => s[Random.Shared.Next(s.Length)]).ToArray());
     }
 
-    private static DateTime GetValidDueDate()
+    private static DateTime GetPastWorkDate()
     {
-        return new DateTime(2025, 1, 2);
+        return new DateTime(2023, 1, 3); // Tuesday
     }
 
-    private static DateTime GetHolidayDate()
+    private static DateTime GetFutureWorkDate()
     {
-        return new DateTime(2025, 1, 1);
+        return new DateTime(2025, 7, 3); // Wednesday
     }
 
-    private static DateTime GetRandomPastDate()
+    private static DateTime GetFutureHolidayDate()
     {
-        return DateTime.Now.AddDays(-Random.Shared.Next(1, 11));
+        return new DateTime(2025, 7, 4); // Friday
     }
 
-    private static DateTime GetRandomNextDate()
+    private static DateTime GetFutureWeekdayDate()
+    {
+        return new DateTime(2025, 7, 6); // Sunday
+    }
+
+    private static DateTime GetFutureRandomDate()
     {
         return DateTime.Now.AddDays(Random.Shared.Next(11));
-    }
-
-    private static DateTime GetRandomNextWeekday()
-    {
-        DayOfWeek[] dayOfWeeks = new[] { DayOfWeek.Saturday, DayOfWeek.Saturday };
-        return GetNextWeekday(DateTime.Now, dayOfWeeks[Random.Shared.Next(dayOfWeeks.Length)]);
-    }
-
-    private static DateTime GetNextWeekday(DateTime start, DayOfWeek day)
-    {
-        int daysToAdd = ((int)day - (int)start.DayOfWeek + 7) % 7;
-        return start.AddDays(daysToAdd);
     }
 
     #endregion
