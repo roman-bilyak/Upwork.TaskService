@@ -56,11 +56,11 @@ public class UpdateTaskCommand : IRequest<TaskDto>
                 throw new EntityNotFoundException(typeof(TaskEntity), request.Id);
             }
 
-            taskEntity.Name = request.Model.Name;
-            taskEntity.Description = request.Model.Description;
-            taskEntity.DueDate = request.Model.DueDate;
-            taskEntity.StartDate = request.Model.StartDate;
-            taskEntity.EndDate = request.Model.EndDate;
+            taskEntity.Name = request.Model.Name.Trim();
+            taskEntity.Description = request.Model.Description.Trim();
+            taskEntity.DueDate = request.Model.DueDate.Date;
+            taskEntity.StartDate = request.Model.StartDate.Date;
+            taskEntity.EndDate = request.Model.EndDate.Date;
             taskEntity.Priority = request.Model.Priority;
             taskEntity.Status = request.Model.Status;
 

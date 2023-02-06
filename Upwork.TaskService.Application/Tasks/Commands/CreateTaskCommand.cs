@@ -49,11 +49,11 @@ public class CreateTaskCommand : IRequest<TaskDto>
             TaskEntity taskEntity = new()
             {
                 Id = Guid.NewGuid().ToString(),
-                Name = request.Model.Name,
-                Description = request.Model.Description,
-                DueDate = request.Model.DueDate,
-                StartDate = request.Model.StartDate,
-                EndDate = request.Model.EndDate,
+                Name = request.Model.Name.Trim(),
+                Description = request.Model.Description.Trim(),
+                DueDate = request.Model.DueDate.Date,
+                StartDate = request.Model.StartDate.Date,
+                EndDate = request.Model.EndDate.Date,
                 Priority = request.Model.Priority,
                 Status = request.Model.Status,
             };
