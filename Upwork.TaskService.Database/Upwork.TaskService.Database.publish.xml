@@ -3,7 +3,7 @@
   <PropertyGroup>
     <IncludeCompositeObjects>False</IncludeCompositeObjects>
     <TargetDatabaseName>TaskServiceDb</TargetDatabaseName>
-    <DeployScriptFileName>Upwork.TaskService.Database.sql</DeployScriptFileName>
+    <DeployScriptFileName>../../Upwork.TaskService.Database.sql</DeployScriptFileName>
     <TargetConnectionString>Data Source=(LocalDb)\MSSQLLocalDB;Integrated Security=True;Persist Security Info=False;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False</TargetConnectionString>
     <BlockOnPossibleDataLoss>False</BlockOnPossibleDataLoss>
     <CreateNewDatabase>True</CreateNewDatabase>
@@ -21,5 +21,7 @@
     <DisableAndReenableDdlTriggers>False</DisableAndReenableDdlTriggers>
     <DropStatisticsNotInSource>False</DropStatisticsNotInSource>
     <DoNotEvaluateSqlCmdVariables>True</DoNotEvaluateSqlCmdVariables>
+    <ScriptDatabaseOptions>False</ScriptDatabaseOptions>
+    <CommentOutSetVarDeclarations>False</CommentOutSetVarDeclarations>
   </PropertyGroup>
 </Project>
