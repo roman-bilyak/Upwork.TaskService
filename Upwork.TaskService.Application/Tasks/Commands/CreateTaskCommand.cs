@@ -43,7 +43,7 @@ public class CreateTaskCommand : IRequest<TaskDto>
                     .Select(x => new DataAnnotationValidationResult(x.ErrorMessage, new[] { x.PropertyName }))
                     .ToArray();
 
-                throw new DataValidationException("ModelState is not valid! See ValidationErrors for details.", errors);
+                throw new DataValidationException(errors);
             }
 
             TaskEntity taskEntity = new()

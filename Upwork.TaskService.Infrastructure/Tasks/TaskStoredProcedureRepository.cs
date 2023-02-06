@@ -1,6 +1,9 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
+using System.Text.Json.Nodes;
 
 namespace Upwork.TaskService.Tasks;
 
@@ -48,13 +51,16 @@ internal class TaskStoredProcedureRepository : IRepository<TaskEntity>
             await connection.CloseAsync();
             return items;
         }
-        catch
+        catch (SqlException ex)
+        {
+            throw;
+        }
+        finally
         {
             if (connection.State != ConnectionState.Closed)
             {
                 await connection.CloseAsync();
             }
-            throw;
         }
     }
 
@@ -90,13 +96,16 @@ internal class TaskStoredProcedureRepository : IRepository<TaskEntity>
             await connection.CloseAsync();
             return item;
         }
-        catch
+        catch (SqlException ex)
+        {
+            throw;
+        }
+        finally
         {
             if (connection.State != ConnectionState.Closed)
             {
                 await connection.CloseAsync();
             }
-            throw;
         }
     }
 
@@ -141,13 +150,29 @@ internal class TaskStoredProcedureRepository : IRepository<TaskEntity>
             await connection.CloseAsync();
             return item;
         }
-        catch
+        catch (SqlException ex)
+        {
+            SqlValidationResult? validationResult = null;
+            try
+            {
+                validationResult = JsonConvert.DeserializeObject<SqlValidationResult>(ex.Message);
+            }
+            catch
+            {
+            }
+
+            if (validationResult is not null)
+            {
+                throw new DataValidationException(new ValidationResult(validationResult.Message, new[] { validationResult.Member }));
+            }
+            throw;
+        }
+        finally
         {
             if (connection.State != ConnectionState.Closed)
             {
                 await connection.CloseAsync();
             }
-            throw;
         }
     }
 
@@ -192,13 +217,29 @@ internal class TaskStoredProcedureRepository : IRepository<TaskEntity>
             await connection.CloseAsync();
             return item;
         }
-        catch
+        catch (SqlException ex)
+        {
+            SqlValidationResult? validationResult = null;
+            try
+            {
+                validationResult = JsonConvert.DeserializeObject<SqlValidationResult>(ex.Message);
+            }
+            catch
+            {
+            }
+
+            if (validationResult is not null)
+            {
+                throw new DataValidationException(new ValidationResult(validationResult.Message, new[] { validationResult.Member }));
+            }
+            throw;
+        }
+        finally
         {
             if (connection.State != ConnectionState.Closed)
             {
                 await connection.CloseAsync();
             }
-            throw;
         }
     }
 
@@ -215,13 +256,17 @@ internal class TaskStoredProcedureRepository : IRepository<TaskEntity>
             await command.ExecuteNonQueryAsync(cancellationToken);
             await connection.CloseAsync();
         }
-        catch
+        catch (SqlException ex)
+        {
+
+            throw;
+        }
+        finally
         {
             if (connection.State != ConnectionState.Closed)
             {
                 await connection.CloseAsync();
             }
-            throw;
         }
     }
 }

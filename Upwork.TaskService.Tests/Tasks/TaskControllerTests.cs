@@ -22,9 +22,9 @@ internal class TaskControllerTests : BaseIntegrationTests
         {
             Name = GetRandomName(),
             Description = GetRandomDescription(),
-            DueDate = DateTime.Now.AddDays(10),
-            StartDate = DateTime.Now,
-            EndDate = DateTime.Now.AddDays(2),
+            DueDate = GetValidDueDate(),
+            StartDate = GetRandomNextDate(),
+            EndDate = GetRandomNextDate(),
             Priority = TaskPriorityEnum.Low,
             Status = TaskStatusEnum.New,
         };
@@ -60,9 +60,9 @@ internal class TaskControllerTests : BaseIntegrationTests
         {
             Name = GetRandomName(),
             Description = GetRandomDescription(),
-            DueDate = DateTime.Now.AddDays(10),
-            StartDate = DateTime.Now,
-            EndDate = DateTime.Now.AddDays(2),
+            DueDate = GetValidDueDate(),
+            StartDate = GetRandomNextDate(),
+            EndDate = GetRandomNextDate(),
             Priority = TaskPriorityEnum.Low,
             Status = TaskStatusEnum.New,
         };
@@ -112,9 +112,9 @@ internal class TaskControllerTests : BaseIntegrationTests
         {
             Name = GetRandomName(),
             Description = GetRandomDescription(),
-            DueDate = DateTime.Now.AddDays(10),
-            StartDate = DateTime.Now,
-            EndDate = DateTime.Now.AddDays(2),
+            DueDate = GetValidDueDate(),
+            StartDate = GetRandomNextDate(),
+            EndDate = GetRandomNextDate(),
             Priority = TaskPriorityEnum.Low,
             Status = TaskStatusEnum.New,
         };
@@ -138,16 +138,16 @@ internal class TaskControllerTests : BaseIntegrationTests
     }
 
     [Test]
-    public void Create_ShouldNotCreateTaskWithInvalidData_NameRequired_Test()
+    public void Create_ShouldNotCreateTaskWithInvalidData_NameEmpty_Test()
     {
         // Arrange
         CreateTaskDto createTaskDto = new()
         {
             Name = string.Empty,
             Description = GetRandomDescription(),
-            DueDate = DateTime.Now.AddDays(10),
-            StartDate = DateTime.Now,
-            EndDate = DateTime.Now.AddDays(2),
+            DueDate = GetValidDueDate(),
+            StartDate = GetRandomNextDate(),
+            EndDate = GetRandomNextDate(),
             Priority = TaskPriorityEnum.Low,
             Status = TaskStatusEnum.New,
         };
@@ -159,7 +159,7 @@ internal class TaskControllerTests : BaseIntegrationTests
         Assert.That(dataValidationException, Is.Not.Null);
         Assert.Multiple(() =>
         {
-            Assert.That(dataValidationException.Message, Is.EqualTo("ModelState is not valid! See ValidationErrors for details."));
+            Assert.That(dataValidationException.Message, Is.EqualTo("Input data is not valid! See ValidationErrors for more details."));
             Assert.That(dataValidationException.Errors, Is.Not.Null);
         });
         Assert.That(dataValidationException.Errors, Has.Count.EqualTo(1));
@@ -173,51 +173,16 @@ internal class TaskControllerTests : BaseIntegrationTests
     }
 
     [Test]
-    public void Create_ShouldNotCreateTaskWithInvalidData_DueDateInPast_Test()
-    {
-        // Arrange
-        CreateTaskDto createTaskDto = new()
-        {
-            Name = string.Empty,
-            Description = GetRandomDescription(),
-            DueDate = DateTime.Now.AddDays(-10),
-            StartDate = DateTime.Now,
-            EndDate = DateTime.Now.AddDays(2),
-            Priority = TaskPriorityEnum.Low,
-            Status = TaskStatusEnum.New,
-        };
-
-        // Act
-        var dataValidationException = Assert.ThrowsAsync<DataValidationException>(async () => await _taskController.CreateAsync(createTaskDto));
-
-        // Assert
-        Assert.That(dataValidationException, Is.Not.Null);
-        Assert.Multiple(() =>
-        {
-            Assert.That(dataValidationException.Message, Is.EqualTo("ModelState is not valid! See ValidationErrors for details."));
-            Assert.That(dataValidationException.Errors, Is.Not.Null);
-        });
-        Assert.That(dataValidationException.Errors, Has.Count.EqualTo(1));
-        Assert.That(dataValidationException.Errors[0].MemberNames, Is.Not.Null);
-        Assert.That(dataValidationException.Errors[0].MemberNames.Count, Is.EqualTo(1));
-        Assert.Multiple(() =>
-        {
-            Assert.That(dataValidationException.Errors[0].MemberNames.ElementAt(0), Is.EqualTo(nameof(CreateTaskDto.DueDate)));
-            Assert.That(dataValidationException.Errors[0].ErrorMessage, Is.EqualTo($"'{nameof(CreateTaskDto.DueDate)}' cannot be in the past'"));
-        });
-    }
-
-    [Test]
-    public void Create_ShouldNotCreateTaskWithInvalidData_DescriptionRequired_Test()
+    public void Create_ShouldNotCreateTaskWithInvalidData_DescriptionEmpty_Test()
     {
         // Arrange
         CreateTaskDto createTaskDto = new()
         {
             Name = GetRandomName(),
             Description = string.Empty,
-            DueDate = DateTime.Now.AddDays(10),
-            StartDate = DateTime.Now,
-            EndDate = DateTime.Now.AddDays(2),
+            DueDate = GetValidDueDate(),
+            StartDate = GetRandomNextDate(),
+            EndDate = GetRandomNextDate(),
             Priority = TaskPriorityEnum.Low,
             Status = TaskStatusEnum.New,
         };
@@ -229,7 +194,7 @@ internal class TaskControllerTests : BaseIntegrationTests
         Assert.That(dataValidationException, Is.Not.Null);
         Assert.Multiple(() =>
         {
-            Assert.That(dataValidationException.Message, Is.EqualTo("ModelState is not valid! See ValidationErrors for details."));
+            Assert.That(dataValidationException.Message, Is.EqualTo("Input data is not valid! See ValidationErrors for more details."));
             Assert.That(dataValidationException.Errors, Is.Not.Null);
         });
         Assert.That(dataValidationException.Errors, Has.Count.EqualTo(1));
@@ -250,9 +215,9 @@ internal class TaskControllerTests : BaseIntegrationTests
         {
             Name = GetRandomName(TaskEntity.MaximumNameLength + 1, TaskEntity.MaximumNameLength + 10),
             Description = GetRandomDescription(),
-            DueDate = DateTime.Now.AddDays(10),
-            StartDate = DateTime.Now,
-            EndDate = DateTime.Now.AddDays(2),
+            DueDate = GetValidDueDate(),
+            StartDate = GetRandomNextDate(),
+            EndDate = GetRandomNextDate(),
             Priority = TaskPriorityEnum.Low,
             Status = TaskStatusEnum.New,
         };
@@ -264,7 +229,7 @@ internal class TaskControllerTests : BaseIntegrationTests
         Assert.That(dataValidationException, Is.Not.Null);
         Assert.Multiple(() =>
         {
-            Assert.That(dataValidationException.Message, Is.EqualTo("ModelState is not valid! See ValidationErrors for details."));
+            Assert.That(dataValidationException.Message, Is.EqualTo("Input data is not valid! See ValidationErrors for more details."));
             Assert.That(dataValidationException.Errors, Is.Not.Null);
         });
         Assert.That(dataValidationException.Errors, Has.Count.EqualTo(1));
@@ -285,9 +250,9 @@ internal class TaskControllerTests : BaseIntegrationTests
         {
             Name = GetRandomName(),
             Description = GetRandomDescription(TaskEntity.MaximumDescriptionLength + 1, TaskEntity.MaximumDescriptionLength + 10),
-            DueDate = DateTime.Now.AddDays(10),
-            StartDate = DateTime.Now,
-            EndDate = DateTime.Now.AddDays(2),
+            DueDate = GetValidDueDate(),
+            StartDate = GetRandomNextDate(),
+            EndDate = GetRandomNextDate(),
             Priority = TaskPriorityEnum.Low,
             Status = TaskStatusEnum.New,
         };
@@ -299,7 +264,7 @@ internal class TaskControllerTests : BaseIntegrationTests
         Assert.That(dataValidationException, Is.Not.Null);
         Assert.Multiple(() =>
         {
-            Assert.That(dataValidationException.Message, Is.EqualTo("ModelState is not valid! See ValidationErrors for details."));
+            Assert.That(dataValidationException.Message, Is.EqualTo("Input data is not valid! See ValidationErrors for more details."));
             Assert.That(dataValidationException.Errors, Is.Not.Null);
         });
         Assert.That(dataValidationException.Errors, Has.Count.EqualTo(1));
@@ -313,6 +278,160 @@ internal class TaskControllerTests : BaseIntegrationTests
     }
 
     [Test]
+    public void Create_ShouldNotCreateTaskWithInvalidData_DueDateInPast_Test()
+    {
+        // Arrange
+        CreateTaskDto createTaskDto = new()
+        {
+            Name = GetRandomName(),
+            Description = GetRandomDescription(),
+            DueDate = GetRandomPastDate(),
+            StartDate = GetRandomNextDate(),
+            EndDate = GetRandomNextDate(),
+            Priority = TaskPriorityEnum.Low,
+            Status = TaskStatusEnum.New,
+        };
+
+        // Act
+        var dataValidationException = Assert.ThrowsAsync<DataValidationException>(async () => await _taskController.CreateAsync(createTaskDto));
+
+        // Assert
+        Assert.That(dataValidationException, Is.Not.Null);
+        Assert.Multiple(() =>
+        {
+            Assert.That(dataValidationException.Message, Is.EqualTo("Input data is not valid! See ValidationErrors for more details."));
+            Assert.That(dataValidationException.Errors, Is.Not.Null);
+        });
+        Assert.That(dataValidationException.Errors, Has.Count.EqualTo(1));
+        Assert.That(dataValidationException.Errors[0].MemberNames, Is.Not.Null);
+        Assert.That(dataValidationException.Errors[0].MemberNames.Count, Is.EqualTo(1));
+        Assert.Multiple(() =>
+        {
+            Assert.That(dataValidationException.Errors[0].MemberNames.ElementAt(0), Is.EqualTo(nameof(CreateTaskDto.DueDate)));
+            Assert.That(dataValidationException.Errors[0].ErrorMessage, Is.EqualTo($"'{nameof(CreateTaskDto.DueDate)}' cannot be in the past"));
+        });
+    }
+
+    [Test]
+    public void Create_ShouldNotCreateTaskWithInvalidData_DueDateWeekday_Test()
+    {
+        // Arrange
+        CreateTaskDto createTaskDto = new()
+        {
+            Name = GetRandomName(),
+            Description = GetRandomDescription(),
+            DueDate = GetRandomNextWeekday(),
+            StartDate = GetRandomNextDate(),
+            EndDate = GetRandomNextDate(),
+            Priority = TaskPriorityEnum.Low,
+            Status = TaskStatusEnum.New,
+        };
+
+        // Act
+        var dataValidationException = Assert.ThrowsAsync<DataValidationException>(async () => await _taskController.CreateAsync(createTaskDto));
+
+        // Assert
+        Assert.That(dataValidationException, Is.Not.Null);
+        Assert.Multiple(() =>
+        {
+            Assert.That(dataValidationException.Message, Is.EqualTo("Input data is not valid! See ValidationErrors for more details."));
+            Assert.That(dataValidationException.Errors, Is.Not.Null);
+        });
+        Assert.That(dataValidationException.Errors, Has.Count.EqualTo(1));
+        Assert.That(dataValidationException.Errors[0].MemberNames, Is.Not.Null);
+        Assert.That(dataValidationException.Errors[0].MemberNames.Count, Is.EqualTo(1));
+        Assert.Multiple(() =>
+        {
+            Assert.That(dataValidationException.Errors[0].MemberNames.ElementAt(0), Is.EqualTo(nameof(CreateTaskDto.DueDate)));
+            Assert.That(dataValidationException.Errors[0].ErrorMessage, Is.EqualTo($"'{nameof(CreateTaskDto.DueDate)}' cannot be on a holiday or weekend"));
+        });
+    }
+
+    [Test]
+    public void Create_ShouldNotCreateTaskWithInvalidData_DueDateHoliday_Test()
+    {
+        // Arrange
+        CreateTaskDto createTaskDto = new()
+        {
+            Name = GetRandomName(),
+            Description = GetRandomDescription(),
+            DueDate = GetHolidayDate(),
+            StartDate = GetRandomNextDate(),
+            EndDate = GetRandomNextDate(),
+            Priority = TaskPriorityEnum.Low,
+            Status = TaskStatusEnum.New,
+        };
+
+        // Act
+        var dataValidationException = Assert.ThrowsAsync<DataValidationException>(async () => await _taskController.CreateAsync(createTaskDto));
+
+        // Assert
+        Assert.That(dataValidationException, Is.Not.Null);
+        Assert.Multiple(() =>
+        {
+            Assert.That(dataValidationException.Message, Is.EqualTo("Input data is not valid! See ValidationErrors for more details."));
+            Assert.That(dataValidationException.Errors, Is.Not.Null);
+        });
+        Assert.That(dataValidationException.Errors, Has.Count.EqualTo(1));
+        Assert.That(dataValidationException.Errors[0].MemberNames, Is.Not.Null);
+        Assert.That(dataValidationException.Errors[0].MemberNames.Count, Is.EqualTo(1));
+        Assert.Multiple(() =>
+        {
+            Assert.That(dataValidationException.Errors[0].MemberNames.ElementAt(0), Is.EqualTo(nameof(CreateTaskDto.DueDate)));
+            Assert.That(dataValidationException.Errors[0].ErrorMessage, Is.EqualTo($"'{nameof(CreateTaskDto.DueDate)}' cannot be on a holiday or weekend"));
+        });
+    }
+
+    [Test]
+    public async Task Create_ShouldNotCreateTaskWithInvalidData_DueDateMaxNotFinished_Test()
+    {
+        // Arrange    
+        for (int i = 0; i < 100; i++)
+        {
+            CreateTaskDto createTaskDto = new()
+            {
+                Name = GetRandomName(),
+                Description = GetRandomDescription(),
+                DueDate = new DateTime(2025, 1, 3),
+                StartDate = GetRandomNextDate(),
+                EndDate = GetRandomNextDate(),
+                Priority = TaskPriorityEnum.High,
+                Status = TaskStatusEnum.InProgress,
+            };
+            await _taskController.CreateAsync(createTaskDto);
+        }
+
+        // Act
+        CreateTaskDto taskDto = new()
+        {
+            Name = GetRandomName(),
+            Description = GetRandomDescription(),
+            DueDate = new DateTime(2025, 1, 3),
+            StartDate = GetRandomNextDate(),
+            EndDate = GetRandomNextDate(),
+            Priority = TaskPriorityEnum.High,
+            Status = TaskStatusEnum.InProgress,
+        };
+        var dataValidationException = Assert.ThrowsAsync<DataValidationException>(async () => await _taskController.CreateAsync(taskDto));
+
+        // Assert
+        Assert.That(dataValidationException, Is.Not.Null);
+        Assert.Multiple(() =>
+        {
+            Assert.That(dataValidationException.Message, Is.EqualTo("Input data is not valid! See ValidationErrors for more details."));
+            Assert.That(dataValidationException.Errors, Is.Not.Null);
+        });
+        Assert.That(dataValidationException.Errors, Has.Count.EqualTo(1));
+        Assert.That(dataValidationException.Errors[0].MemberNames, Is.Not.Null);
+        Assert.That(dataValidationException.Errors[0].MemberNames.Count, Is.EqualTo(1));
+        Assert.Multiple(() =>
+        {
+            Assert.That(dataValidationException.Errors[0].MemberNames.ElementAt(0), Is.EqualTo(nameof(CreateTaskDto.DueDate)));
+            Assert.That(dataValidationException.Errors[0].ErrorMessage, Is.EqualTo($"The system doesn't allow more than 100 High Priority tasks which have the same due date and are not finished"));
+        });
+    }
+
+    [Test]
     public async Task Update_ShouldUpdateTask_Test()
     {
         // Arrange
@@ -320,9 +439,9 @@ internal class TaskControllerTests : BaseIntegrationTests
         {
             Name = GetRandomName(),
             Description = GetRandomDescription(),
-            DueDate = DateTime.Now.AddDays(10),
-            StartDate = DateTime.Now,
-            EndDate = DateTime.Now.AddDays(2),
+            DueDate = GetValidDueDate(),
+            StartDate = GetRandomNextDate(),
+            EndDate = GetRandomNextDate(),
             Priority = TaskPriorityEnum.Low,
             Status = TaskStatusEnum.New,
         };
@@ -333,9 +452,9 @@ internal class TaskControllerTests : BaseIntegrationTests
         {
             Name = GetRandomName(),
             Description = GetRandomDescription(),
-            DueDate = createTaskDto.DueDate.AddDays(5),
-            StartDate = createTaskDto.StartDate.AddDays(2),
-            EndDate = createTaskDto.EndDate.AddDays(3),
+            DueDate = GetValidDueDate(),
+            StartDate = GetRandomNextDate(),
+            EndDate = GetRandomNextDate(),
             Priority = TaskPriorityEnum.Medium,
             Status = TaskStatusEnum.InProgress,
         };
@@ -357,16 +476,44 @@ internal class TaskControllerTests : BaseIntegrationTests
     }
 
     [Test]
-    public async Task Update_ShouldNotUpdateTaskWithInvalidData_NameRequired_Test()
+    public void Update_ThrowNotFoundExceptionWhenTaskNotExists_Test()
+    {
+        // Arrange
+        string invalidTaskId = Guid.NewGuid().ToString();
+
+        // Act
+        UpdateTaskDto updateTaskDto = new()
+        {
+            Name = GetRandomName(),
+            Description = GetRandomDescription(),
+            DueDate = GetValidDueDate(),
+            StartDate = GetRandomNextDate(),
+            EndDate = GetRandomNextDate(),
+            Priority = TaskPriorityEnum.Medium,
+            Status = TaskStatusEnum.InProgress,
+        };
+        EntityNotFoundException exception = Assert.ThrowsAsync<EntityNotFoundException>(async () => await _taskController.UpdateAsync(invalidTaskId, updateTaskDto));
+
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(exception.Message, Is.EqualTo($"Entity (type = '{typeof(TaskEntity)}', id = '{invalidTaskId}') not found"));
+            Assert.That(exception.Id, Is.EqualTo(invalidTaskId));
+            Assert.That(exception.EntityType, Is.EqualTo(typeof(TaskEntity)));
+        });
+    }
+
+    [Test]
+    public async Task Update_ShouldNotUpdateTaskWithInvalidData_NameEmpty_Test()
     {
         // Arrange
         CreateTaskDto createTaskDto = new()
         {
             Name = GetRandomName(),
             Description = GetRandomDescription(),
-            DueDate = DateTime.Now.AddDays(10),
-            StartDate = DateTime.Now,
-            EndDate = DateTime.Now.AddDays(2),
+            DueDate = GetValidDueDate(),
+            StartDate = GetRandomNextDate(),
+            EndDate = GetRandomNextDate(),
             Priority = TaskPriorityEnum.Low,
             Status = TaskStatusEnum.New,
         };
@@ -377,9 +524,9 @@ internal class TaskControllerTests : BaseIntegrationTests
         {
             Name = string.Empty,
             Description = GetRandomDescription(),
-            DueDate = createTaskDto.DueDate.AddDays(5),
-            StartDate = createTaskDto.StartDate.AddDays(2),
-            EndDate = createTaskDto.EndDate.AddDays(3),
+            DueDate = GetValidDueDate(),
+            StartDate = GetRandomNextDate(),
+            EndDate = GetRandomNextDate(),
             Priority = TaskPriorityEnum.Medium,
             Status = TaskStatusEnum.InProgress,
         };
@@ -389,7 +536,7 @@ internal class TaskControllerTests : BaseIntegrationTests
         Assert.That(dataValidationException, Is.Not.Null);
         Assert.Multiple(() =>
         {
-            Assert.That(dataValidationException.Message, Is.EqualTo("ModelState is not valid! See ValidationErrors for details."));
+            Assert.That(dataValidationException.Message, Is.EqualTo("Input data is not valid! See ValidationErrors for more details."));
             Assert.That(dataValidationException.Errors, Is.Not.Null);
         });
         Assert.That(dataValidationException.Errors, Has.Count.EqualTo(1));
@@ -403,16 +550,16 @@ internal class TaskControllerTests : BaseIntegrationTests
     }
 
     [Test]
-    public async Task Update_ShouldNotUpdateTaskWithInvalidData_DescriptionRequired_Test()
+    public async Task Update_ShouldNotUpdateTaskWithInvalidData_DescriptionEmpty_Test()
     {
         // Arrange
         CreateTaskDto createTaskDto = new()
         {
             Name = GetRandomName(),
             Description = GetRandomDescription(),
-            DueDate = DateTime.Now.AddDays(10),
-            StartDate = DateTime.Now,
-            EndDate = DateTime.Now.AddDays(2),
+            DueDate = GetValidDueDate(),
+            StartDate = GetRandomNextDate(),
+            EndDate = GetRandomNextDate(),
             Priority = TaskPriorityEnum.Low,
             Status = TaskStatusEnum.New,
         };
@@ -423,9 +570,9 @@ internal class TaskControllerTests : BaseIntegrationTests
         {
             Name = GetRandomName(),
             Description = string.Empty,
-            DueDate = createTaskDto.DueDate.AddDays(5),
-            StartDate = createTaskDto.StartDate.AddDays(2),
-            EndDate = createTaskDto.EndDate.AddDays(3),
+            DueDate = GetValidDueDate(),
+            StartDate = GetRandomNextDate(),
+            EndDate = GetRandomNextDate(),
             Priority = TaskPriorityEnum.Medium,
             Status = TaskStatusEnum.InProgress,
         };
@@ -435,7 +582,7 @@ internal class TaskControllerTests : BaseIntegrationTests
         Assert.That(dataValidationException, Is.Not.Null);
         Assert.Multiple(() =>
         {
-            Assert.That(dataValidationException.Message, Is.EqualTo("ModelState is not valid! See ValidationErrors for details."));
+            Assert.That(dataValidationException.Message, Is.EqualTo("Input data is not valid! See ValidationErrors for more details."));
             Assert.That(dataValidationException.Errors, Is.Not.Null);
         });
         Assert.That(dataValidationException.Errors, Has.Count.EqualTo(1));
@@ -456,9 +603,9 @@ internal class TaskControllerTests : BaseIntegrationTests
         {
             Name = GetRandomName(),
             Description = GetRandomDescription(),
-            DueDate = DateTime.Now.AddDays(10),
-            StartDate = DateTime.Now,
-            EndDate = DateTime.Now.AddDays(2),
+            DueDate = GetValidDueDate(),
+            StartDate = GetRandomNextDate(),
+            EndDate = GetRandomNextDate(),
             Priority = TaskPriorityEnum.Low,
             Status = TaskStatusEnum.New,
         };
@@ -481,7 +628,7 @@ internal class TaskControllerTests : BaseIntegrationTests
         Assert.That(dataValidationException, Is.Not.Null);
         Assert.Multiple(() =>
         {
-            Assert.That(dataValidationException.Message, Is.EqualTo("ModelState is not valid! See ValidationErrors for details."));
+            Assert.That(dataValidationException.Message, Is.EqualTo("Input data is not valid! See ValidationErrors for more details."));
             Assert.That(dataValidationException.Errors, Is.Not.Null);
         });
         Assert.That(dataValidationException.Errors, Has.Count.EqualTo(1));
@@ -502,9 +649,9 @@ internal class TaskControllerTests : BaseIntegrationTests
         {
             Name = GetRandomName(),
             Description = GetRandomDescription(),
-            DueDate = DateTime.Now.AddDays(10),
-            StartDate = DateTime.Now,
-            EndDate = DateTime.Now.AddDays(2),
+            DueDate = GetValidDueDate(),
+            StartDate = GetRandomNextDate(),
+            EndDate = GetRandomNextDate(),
             Priority = TaskPriorityEnum.Low,
             Status = TaskStatusEnum.New,
         };
@@ -515,9 +662,9 @@ internal class TaskControllerTests : BaseIntegrationTests
         {
             Name = GetRandomName(),
             Description = GetRandomDescription(TaskEntity.MaximumDescriptionLength + 1, TaskEntity.MaximumDescriptionLength + 10),
-            DueDate = createTaskDto.DueDate.AddDays(5),
-            StartDate = createTaskDto.StartDate.AddDays(2),
-            EndDate = createTaskDto.EndDate.AddDays(3),
+            DueDate = GetValidDueDate(),
+            StartDate = GetRandomNextDate(),
+            EndDate = GetRandomNextDate(),
             Priority = TaskPriorityEnum.Medium,
             Status = TaskStatusEnum.InProgress,
         };
@@ -527,7 +674,7 @@ internal class TaskControllerTests : BaseIntegrationTests
         Assert.That(dataValidationException, Is.Not.Null);
         Assert.Multiple(() =>
         {
-            Assert.That(dataValidationException.Message, Is.EqualTo("ModelState is not valid! See ValidationErrors for details."));
+            Assert.That(dataValidationException.Message, Is.EqualTo("Input data is not valid! See ValidationErrors for more details."));
             Assert.That(dataValidationException.Errors, Is.Not.Null);
         });
         Assert.That(dataValidationException.Errors, Has.Count.EqualTo(1));
@@ -541,30 +688,200 @@ internal class TaskControllerTests : BaseIntegrationTests
     }
 
     [Test]
-    public void Update_ThrowNotFoundExceptionWhenTaskNotExists_Test()
+    public async Task Update_ShouldNotUpdateTaskWithInvalidData_DueDateInPast_Test()
     {
         // Arrange
-        string invalidTaskId = Guid.NewGuid().ToString();
+        CreateTaskDto createTaskDto = new()
+        {
+            Name = GetRandomName(),
+            Description = GetRandomDescription(),
+            DueDate = GetValidDueDate(),
+            StartDate = GetRandomNextDate(),
+            EndDate = GetRandomNextDate(),
+            Priority = TaskPriorityEnum.Low,
+            Status = TaskStatusEnum.New,
+        };
+        string taskId = (await _taskController.CreateAsync(createTaskDto)).Id;
 
         // Act
         UpdateTaskDto updateTaskDto = new()
         {
             Name = GetRandomName(),
             Description = GetRandomDescription(),
-            DueDate = DateTime.Now.AddDays(10),
-            StartDate = DateTime.Now,
-            EndDate = DateTime.Now.AddDays(2),
+            DueDate = GetRandomPastDate(),
+            StartDate = GetRandomNextDate(),
+            EndDate = GetRandomNextDate(),
             Priority = TaskPriorityEnum.Medium,
             Status = TaskStatusEnum.InProgress,
         };
-        EntityNotFoundException exception = Assert.ThrowsAsync<EntityNotFoundException>(async () => await _taskController.UpdateAsync(invalidTaskId, updateTaskDto));
+        var dataValidationException = Assert.ThrowsAsync<DataValidationException>(async () => await _taskController.UpdateAsync(taskId, updateTaskDto));
 
         // Assert
+        Assert.That(dataValidationException, Is.Not.Null);
         Assert.Multiple(() =>
         {
-            Assert.That(exception.Message, Is.EqualTo($"Entity (type = '{typeof(TaskEntity)}', id = '{invalidTaskId}') not found"));
-            Assert.That(exception.Id, Is.EqualTo(invalidTaskId));
-            Assert.That(exception.EntityType, Is.EqualTo(typeof(TaskEntity)));
+            Assert.That(dataValidationException.Message, Is.EqualTo("Input data is not valid! See ValidationErrors for more details."));
+            Assert.That(dataValidationException.Errors, Is.Not.Null);
+        });
+        Assert.That(dataValidationException.Errors, Has.Count.EqualTo(1));
+        Assert.That(dataValidationException.Errors[0].MemberNames, Is.Not.Null);
+        Assert.That(dataValidationException.Errors[0].MemberNames.Count, Is.EqualTo(1));
+        Assert.Multiple(() =>
+        {
+            Assert.That(dataValidationException.Errors[0].MemberNames.ElementAt(0), Is.EqualTo(nameof(UpdateTaskDto.DueDate)));
+            Assert.That(dataValidationException.Errors[0].ErrorMessage, Is.EqualTo($"'{nameof(UpdateTaskDto.DueDate)}' cannot be in the past"));
+        });
+    }
+
+    [Test]
+    public async Task Update_ShouldNotUpdateTaskWithInvalidData_DueDateWeekday_Test()
+    {
+        // Arrange
+        CreateTaskDto createTaskDto = new()
+        {
+            Name = GetRandomName(),
+            Description = GetRandomDescription(),
+            DueDate = GetRandomNextDate(),
+            StartDate = GetRandomNextDate(),
+            EndDate = GetRandomNextDate(),
+            Priority = TaskPriorityEnum.Low,
+            Status = TaskStatusEnum.New,
+        };
+        string taskId = (await _taskController.CreateAsync(createTaskDto)).Id;
+
+        // Act
+        UpdateTaskDto updateTaskDto = new()
+        {
+            Name = GetRandomName(),
+            Description = GetRandomDescription(),
+            DueDate = GetRandomNextWeekday(),
+            StartDate = GetRandomNextDate(),
+            EndDate = GetRandomNextDate(),
+            Priority = TaskPriorityEnum.Medium,
+            Status = TaskStatusEnum.InProgress,
+        };
+        var dataValidationException = Assert.ThrowsAsync<DataValidationException>(async () => await _taskController.UpdateAsync(taskId, updateTaskDto));
+
+        // Assert
+        Assert.That(dataValidationException, Is.Not.Null);
+        Assert.Multiple(() =>
+        {
+            Assert.That(dataValidationException.Message, Is.EqualTo("Input data is not valid! See ValidationErrors for more details."));
+            Assert.That(dataValidationException.Errors, Is.Not.Null);
+        });
+        Assert.That(dataValidationException.Errors, Has.Count.EqualTo(1));
+        Assert.That(dataValidationException.Errors[0].MemberNames, Is.Not.Null);
+        Assert.That(dataValidationException.Errors[0].MemberNames.Count, Is.EqualTo(1));
+        Assert.Multiple(() =>
+        {
+            Assert.That(dataValidationException.Errors[0].MemberNames.ElementAt(0), Is.EqualTo(nameof(UpdateTaskDto.DueDate)));
+            Assert.That(dataValidationException.Errors[0].ErrorMessage, Is.EqualTo($"'{nameof(UpdateTaskDto.DueDate)}' cannot be on a holiday or weekend"));
+        });
+    }
+
+    [Test]
+    public async Task Update_ShouldNotUpdateTaskWithInvalidData_DueDateHoliday_Test()
+    {
+        // Arrange
+        CreateTaskDto createTaskDto = new()
+        {
+            Name = GetRandomName(),
+            Description = GetRandomDescription(),
+            DueDate = GetHolidayDate(),
+            StartDate = GetRandomNextDate(),
+            EndDate = GetRandomNextDate(),
+            Priority = TaskPriorityEnum.Low,
+            Status = TaskStatusEnum.New,
+        };
+        string taskId = (await _taskController.CreateAsync(createTaskDto)).Id;
+
+        // Act
+        UpdateTaskDto updateTaskDto = new()
+        {
+            Name = GetRandomName(),
+            Description = GetRandomDescription(),
+            DueDate = GetRandomNextWeekday(),
+            StartDate = GetRandomNextDate(),
+            EndDate = GetRandomNextDate(),
+            Priority = TaskPriorityEnum.Medium,
+            Status = TaskStatusEnum.InProgress,
+        };
+        var dataValidationException = Assert.ThrowsAsync<DataValidationException>(async () => await _taskController.UpdateAsync(taskId, updateTaskDto));
+
+        // Assert
+        Assert.That(dataValidationException, Is.Not.Null);
+        Assert.Multiple(() =>
+        {
+            Assert.That(dataValidationException.Message, Is.EqualTo("Input data is not valid! See ValidationErrors for more details."));
+            Assert.That(dataValidationException.Errors, Is.Not.Null);
+        });
+        Assert.That(dataValidationException.Errors, Has.Count.EqualTo(1));
+        Assert.That(dataValidationException.Errors[0].MemberNames, Is.Not.Null);
+        Assert.That(dataValidationException.Errors[0].MemberNames.Count, Is.EqualTo(1));
+        Assert.Multiple(() =>
+        {
+            Assert.That(dataValidationException.Errors[0].MemberNames.ElementAt(0), Is.EqualTo(nameof(UpdateTaskDto.DueDate)));
+            Assert.That(dataValidationException.Errors[0].ErrorMessage, Is.EqualTo($"'{nameof(UpdateTaskDto.DueDate)}' cannot be on a holiday or weekend"));
+        });
+    }
+
+    [Test]
+    public async Task Update_ShouldNotUpdateTaskWithInvalidData_DueDateMaxNotFinished_Test()
+    {
+        // Arrange    
+        for (int i = 0; i < 100; i++)
+        {
+            CreateTaskDto createTaskDto = new()
+            {
+                Name = GetRandomName(),
+                Description = GetRandomDescription(),
+                DueDate = new DateTime(2025, 1, 3),
+                StartDate = GetRandomNextDate(),
+                EndDate = GetRandomNextDate(),
+                Priority = TaskPriorityEnum.High,
+                Status = TaskStatusEnum.InProgress,
+            };
+            await _taskController.CreateAsync(createTaskDto);
+        }
+        CreateTaskDto taskDto = new()
+        {
+            Name = GetRandomName(),
+            Description = GetRandomDescription(),
+            DueDate = new DateTime(2025, 1, 6),
+            StartDate = GetRandomNextDate(),
+            EndDate = GetRandomNextDate(),
+            Priority = TaskPriorityEnum.High,
+            Status = TaskStatusEnum.InProgress,
+        };
+        string taskId = (await _taskController.CreateAsync(taskDto)).Id;
+
+        // Act
+        UpdateTaskDto updateTaskDto = new()
+        {
+            Name = GetRandomName(),
+            Description = GetRandomDescription(),
+            DueDate = new DateTime(2025, 1, 3),
+            StartDate = GetRandomNextDate(),
+            EndDate = GetRandomNextDate(),
+            Priority = TaskPriorityEnum.High,
+            Status = TaskStatusEnum.InProgress,
+        };
+        var dataValidationException = Assert.ThrowsAsync<DataValidationException>(async () => await _taskController.UpdateAsync(taskId, updateTaskDto));
+
+        // Assert
+        Assert.That(dataValidationException, Is.Not.Null);
+        Assert.Multiple(() =>
+        {
+            Assert.That(dataValidationException.Message, Is.EqualTo("Input data is not valid! See ValidationErrors for more details."));
+            Assert.That(dataValidationException.Errors, Is.Not.Null);
+        });
+        Assert.That(dataValidationException.Errors, Has.Count.EqualTo(1));
+        Assert.That(dataValidationException.Errors[0].MemberNames, Is.Not.Null);
+        Assert.That(dataValidationException.Errors[0].MemberNames.Count, Is.EqualTo(1));
+        Assert.Multiple(() =>
+        {
+            Assert.That(dataValidationException.Errors[0].MemberNames.ElementAt(0), Is.EqualTo(nameof(UpdateTaskDto.DueDate)));
+            Assert.That(dataValidationException.Errors[0].ErrorMessage, Is.EqualTo($"The system doesn''t allow more than 100 High Priority tasks which have the same due date and are not finished"));
         });
     }
 
@@ -576,9 +893,9 @@ internal class TaskControllerTests : BaseIntegrationTests
         {
             Name = GetRandomName(),
             Description = GetRandomDescription(),
-            DueDate = DateTime.Now.AddDays(10),
-            StartDate = DateTime.Now,
-            EndDate = DateTime.Now.AddDays(2),
+            DueDate = GetValidDueDate(),
+            StartDate = GetRandomNextDate(),
+            EndDate = GetRandomNextDate(),
             Priority = TaskPriorityEnum.Low,
             Status = TaskStatusEnum.New,
         };
@@ -615,15 +932,15 @@ internal class TaskControllerTests : BaseIntegrationTests
 
     private static string GetRandomName(int minLength = 1, int maxLength = TaskEntity.MaximumNameLength)
     {
-        return new string(' ', Random.Shared.Next(0, 5)) + RandomString(minLength, maxLength) + new string(' ', Random.Shared.Next(0, 5));
+        return new string(' ', Random.Shared.Next(0, 5)) + GetRandomString(minLength, maxLength) + new string(' ', Random.Shared.Next(0, 5));
     }
 
     private static string GetRandomDescription(int minLength = 1, int maxLength = TaskEntity.MaximumDescriptionLength)
     {
-        return new string(' ', Random.Shared.Next(0, 5)) + RandomString(minLength, maxLength) + new string(' ', Random.Shared.Next(0, 5));
+        return new string(' ', Random.Shared.Next(0, 5)) + GetRandomString(minLength, maxLength) + new string(' ', Random.Shared.Next(0, 5));
     }
 
-    private static string RandomString(int minLength, int maxLength)
+    private static string GetRandomString(int minLength, int maxLength)
     {
         if (maxLength < minLength)
         {
@@ -633,6 +950,38 @@ internal class TaskControllerTests : BaseIntegrationTests
         const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         return new string(Enumerable.Repeat(chars, Random.Shared.Next(minLength, maxLength + 1))
             .Select(s => s[Random.Shared.Next(s.Length)]).ToArray());
+    }
+
+    private static DateTime GetValidDueDate()
+    {
+        return new DateTime(2025, 1, 2);
+    }
+
+    private static DateTime GetHolidayDate()
+    {
+        return new DateTime(2025, 1, 1);
+    }
+
+    private static DateTime GetRandomPastDate()
+    {
+        return DateTime.Now.AddDays(-Random.Shared.Next(1, 11));
+    }
+
+    private static DateTime GetRandomNextDate()
+    {
+        return DateTime.Now.AddDays(Random.Shared.Next(11));
+    }
+
+    private static DateTime GetRandomNextWeekday()
+    {
+        DayOfWeek[] dayOfWeeks = new[] { DayOfWeek.Saturday, DayOfWeek.Saturday };
+        return GetNextWeekday(DateTime.Now, dayOfWeeks[Random.Shared.Next(dayOfWeeks.Length)]);
+    }
+
+    private static DateTime GetNextWeekday(DateTime start, DayOfWeek day)
+    {
+        int daysToAdd = ((int)day - (int)start.DayOfWeek + 7) % 7;
+        return start.AddDays(daysToAdd);
     }
 
     #endregion
