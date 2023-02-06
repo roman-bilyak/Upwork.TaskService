@@ -25,8 +25,8 @@ internal class TaskControllerTests : BaseIntegrationTests
             DueDate = GetFutureWorkDate(),
             StartDate = GetFutureRandomDate(),
             EndDate = GetFutureRandomDate(),
-            Priority = TaskPriorityEnum.Low,
-            Status = TaskStatusEnum.New,
+            Priority = GetRandomPriority(TaskPriorityEnum.Medium, TaskPriorityEnum.Low),
+            Status = GetRandomStatus(TaskStatusEnum.New, TaskStatusEnum.InProgress, TaskStatusEnum.Finished),
         };
         string newTaskId = (await _taskController.CreateAsync(createTaskDto)).Id;
 
@@ -63,8 +63,8 @@ internal class TaskControllerTests : BaseIntegrationTests
             DueDate = GetFutureWorkDate(),
             StartDate = GetFutureRandomDate(),
             EndDate = GetFutureRandomDate(),
-            Priority = TaskPriorityEnum.Low,
-            Status = TaskStatusEnum.New,
+            Priority = GetRandomPriority(TaskPriorityEnum.Medium, TaskPriorityEnum.Low),
+            Status = GetRandomStatus(TaskStatusEnum.New, TaskStatusEnum.InProgress, TaskStatusEnum.Finished),
         };
         string taskId = (await _taskController.CreateAsync(createTaskDto)).Id;
 
@@ -115,8 +115,8 @@ internal class TaskControllerTests : BaseIntegrationTests
             DueDate = GetFutureWorkDate(),
             StartDate = GetFutureRandomDate(),
             EndDate = GetFutureRandomDate(),
-            Priority = TaskPriorityEnum.Low,
-            Status = TaskStatusEnum.New,
+            Priority = GetRandomPriority(TaskPriorityEnum.Medium, TaskPriorityEnum.Low),
+            Status = GetRandomStatus(TaskStatusEnum.New, TaskStatusEnum.InProgress, TaskStatusEnum.Finished),
         };
 
         // Act
@@ -148,8 +148,8 @@ internal class TaskControllerTests : BaseIntegrationTests
             DueDate = GetFutureWorkDate(),
             StartDate = GetFutureRandomDate(),
             EndDate = GetFutureRandomDate(),
-            Priority = TaskPriorityEnum.Low,
-            Status = TaskStatusEnum.New,
+            Priority = GetRandomPriority(TaskPriorityEnum.Medium, TaskPriorityEnum.Low),
+            Status = GetRandomStatus(TaskStatusEnum.New, TaskStatusEnum.InProgress, TaskStatusEnum.Finished),
         };
 
         // Act
@@ -183,8 +183,8 @@ internal class TaskControllerTests : BaseIntegrationTests
             DueDate = GetFutureWorkDate(),
             StartDate = GetFutureRandomDate(),
             EndDate = GetFutureRandomDate(),
-            Priority = TaskPriorityEnum.Low,
-            Status = TaskStatusEnum.New,
+            Priority = GetRandomPriority(TaskPriorityEnum.Medium, TaskPriorityEnum.Low),
+            Status = GetRandomStatus(TaskStatusEnum.New, TaskStatusEnum.InProgress, TaskStatusEnum.Finished),
         };
 
         // Act
@@ -218,8 +218,8 @@ internal class TaskControllerTests : BaseIntegrationTests
             DueDate = GetFutureWorkDate(),
             StartDate = GetFutureRandomDate(),
             EndDate = GetFutureRandomDate(),
-            Priority = TaskPriorityEnum.Low,
-            Status = TaskStatusEnum.New,
+            Priority = GetRandomPriority(TaskPriorityEnum.Medium, TaskPriorityEnum.Low),
+            Status = GetRandomStatus(TaskStatusEnum.New, TaskStatusEnum.InProgress, TaskStatusEnum.Finished),
         };
 
         // Act
@@ -253,8 +253,8 @@ internal class TaskControllerTests : BaseIntegrationTests
             DueDate = GetFutureWorkDate(),
             StartDate = GetFutureRandomDate(),
             EndDate = GetFutureRandomDate(),
-            Priority = TaskPriorityEnum.Low,
-            Status = TaskStatusEnum.New,
+            Priority = GetRandomPriority(TaskPriorityEnum.Medium, TaskPriorityEnum.Low),
+            Status = GetRandomStatus(TaskStatusEnum.New, TaskStatusEnum.InProgress, TaskStatusEnum.Finished),
         };
 
         // Act
@@ -288,8 +288,8 @@ internal class TaskControllerTests : BaseIntegrationTests
             DueDate = GetPastWorkDate(),
             StartDate = GetFutureRandomDate(),
             EndDate = GetFutureRandomDate(),
-            Priority = TaskPriorityEnum.Low,
-            Status = TaskStatusEnum.New,
+            Priority = GetRandomPriority(TaskPriorityEnum.Medium, TaskPriorityEnum.Low),
+            Status = GetRandomStatus(TaskStatusEnum.New, TaskStatusEnum.InProgress, TaskStatusEnum.Finished),
         };
 
         // Act
@@ -323,8 +323,8 @@ internal class TaskControllerTests : BaseIntegrationTests
             DueDate = GetFutureWeekdayDate(),
             StartDate = GetFutureRandomDate(),
             EndDate = GetFutureRandomDate(),
-            Priority = TaskPriorityEnum.Low,
-            Status = TaskStatusEnum.New,
+            Priority = GetRandomPriority(TaskPriorityEnum.Medium, TaskPriorityEnum.Low),
+            Status = GetRandomStatus(TaskStatusEnum.New, TaskStatusEnum.InProgress, TaskStatusEnum.Finished),
         };
 
         // Act
@@ -358,8 +358,8 @@ internal class TaskControllerTests : BaseIntegrationTests
             DueDate = GetFutureHolidayDate(),
             StartDate = GetFutureRandomDate(),
             EndDate = GetFutureRandomDate(),
-            Priority = TaskPriorityEnum.Low,
-            Status = TaskStatusEnum.New,
+            Priority = GetRandomPriority(TaskPriorityEnum.Medium, TaskPriorityEnum.Low),
+            Status = GetRandomStatus(TaskStatusEnum.New, TaskStatusEnum.InProgress, TaskStatusEnum.Finished),
         };
 
         // Act
@@ -400,7 +400,7 @@ internal class TaskControllerTests : BaseIntegrationTests
                 StartDate = GetFutureRandomDate(),
                 EndDate = GetFutureRandomDate(),
                 Priority = TaskPriorityEnum.High,
-                Status = TaskStatusEnum.InProgress,
+                Status = GetRandomStatus(TaskStatusEnum.New, TaskStatusEnum.InProgress),
             };
             await _taskController.CreateAsync(createTaskDto);
         }
@@ -414,7 +414,7 @@ internal class TaskControllerTests : BaseIntegrationTests
             StartDate = GetFutureRandomDate(),
             EndDate = GetFutureRandomDate(),
             Priority = TaskPriorityEnum.High,
-            Status = TaskStatusEnum.InProgress,
+            Status = GetRandomStatus(TaskStatusEnum.New, TaskStatusEnum.InProgress),
         };
         var dataValidationException = Assert.ThrowsAsync<DataValidationException>(async () => await _taskController.CreateAsync(taskDto));
 
@@ -446,8 +446,8 @@ internal class TaskControllerTests : BaseIntegrationTests
             DueDate = GetFutureWorkDate(),
             StartDate = GetFutureRandomDate(),
             EndDate = GetFutureRandomDate(),
-            Priority = TaskPriorityEnum.Low,
-            Status = TaskStatusEnum.New,
+            Priority = GetRandomPriority(TaskPriorityEnum.Medium, TaskPriorityEnum.Low),
+            Status = GetRandomStatus(TaskStatusEnum.New, TaskStatusEnum.InProgress, TaskStatusEnum.Finished),
         };
         TaskDto taskDto = await _taskController.CreateAsync(createTaskDto);
 
@@ -459,8 +459,8 @@ internal class TaskControllerTests : BaseIntegrationTests
             DueDate = GetFutureWorkDate(),
             StartDate = GetFutureRandomDate(),
             EndDate = GetFutureRandomDate(),
-            Priority = TaskPriorityEnum.Medium,
-            Status = TaskStatusEnum.InProgress,
+            Priority = GetRandomPriority(TaskPriorityEnum.Medium, TaskPriorityEnum.Low),
+            Status = GetRandomStatus(TaskStatusEnum.New, TaskStatusEnum.InProgress, TaskStatusEnum.Finished),
         };
         TaskDto response = await _taskController.UpdateAsync(taskDto.Id, updateTaskDto);
 
@@ -493,8 +493,8 @@ internal class TaskControllerTests : BaseIntegrationTests
             DueDate = GetFutureWorkDate(),
             StartDate = GetFutureRandomDate(),
             EndDate = GetFutureRandomDate(),
-            Priority = TaskPriorityEnum.Medium,
-            Status = TaskStatusEnum.InProgress,
+            Priority = GetRandomPriority(TaskPriorityEnum.Medium, TaskPriorityEnum.Low),
+            Status = GetRandomStatus(TaskStatusEnum.New, TaskStatusEnum.InProgress, TaskStatusEnum.Finished),
         };
         EntityNotFoundException exception = Assert.ThrowsAsync<EntityNotFoundException>(async () => await _taskController.UpdateAsync(invalidTaskId, updateTaskDto));
 
@@ -518,8 +518,8 @@ internal class TaskControllerTests : BaseIntegrationTests
             DueDate = GetFutureWorkDate(),
             StartDate = GetFutureRandomDate(),
             EndDate = GetFutureRandomDate(),
-            Priority = TaskPriorityEnum.Low,
-            Status = TaskStatusEnum.New,
+            Priority = GetRandomPriority(TaskPriorityEnum.Medium, TaskPriorityEnum.Low),
+            Status = GetRandomStatus(TaskStatusEnum.New, TaskStatusEnum.InProgress, TaskStatusEnum.Finished),
         };
         string taskId = (await _taskController.CreateAsync(createTaskDto)).Id;
 
@@ -531,8 +531,8 @@ internal class TaskControllerTests : BaseIntegrationTests
             DueDate = GetFutureWorkDate(),
             StartDate = GetFutureRandomDate(),
             EndDate = GetFutureRandomDate(),
-            Priority = TaskPriorityEnum.Medium,
-            Status = TaskStatusEnum.InProgress,
+            Priority = GetRandomPriority(TaskPriorityEnum.Medium, TaskPriorityEnum.Low),
+            Status = GetRandomStatus(TaskStatusEnum.New, TaskStatusEnum.InProgress, TaskStatusEnum.Finished),
         };
         var dataValidationException = Assert.ThrowsAsync<DataValidationException>(async () => await _taskController.UpdateAsync(taskId, updateTaskDto));
 
@@ -564,8 +564,8 @@ internal class TaskControllerTests : BaseIntegrationTests
             DueDate = GetFutureWorkDate(),
             StartDate = GetFutureRandomDate(),
             EndDate = GetFutureRandomDate(),
-            Priority = TaskPriorityEnum.Low,
-            Status = TaskStatusEnum.New,
+            Priority = GetRandomPriority(TaskPriorityEnum.Medium, TaskPriorityEnum.Low),
+            Status = GetRandomStatus(TaskStatusEnum.New, TaskStatusEnum.InProgress, TaskStatusEnum.Finished),
         };
         string taskId = (await _taskController.CreateAsync(createTaskDto)).Id;
 
@@ -577,8 +577,8 @@ internal class TaskControllerTests : BaseIntegrationTests
             DueDate = GetFutureWorkDate(),
             StartDate = GetFutureRandomDate(),
             EndDate = GetFutureRandomDate(),
-            Priority = TaskPriorityEnum.Medium,
-            Status = TaskStatusEnum.InProgress,
+            Priority = GetRandomPriority(TaskPriorityEnum.Medium, TaskPriorityEnum.Low),
+            Status = GetRandomStatus(TaskStatusEnum.New, TaskStatusEnum.InProgress, TaskStatusEnum.Finished),
         };
         var dataValidationException = Assert.ThrowsAsync<DataValidationException>(async () => await _taskController.UpdateAsync(taskId, updateTaskDto));
 
@@ -610,8 +610,8 @@ internal class TaskControllerTests : BaseIntegrationTests
             DueDate = GetFutureWorkDate(),
             StartDate = GetFutureRandomDate(),
             EndDate = GetFutureRandomDate(),
-            Priority = TaskPriorityEnum.Low,
-            Status = TaskStatusEnum.New,
+            Priority = GetRandomPriority(TaskPriorityEnum.Medium, TaskPriorityEnum.Low),
+            Status = GetRandomStatus(TaskStatusEnum.New, TaskStatusEnum.InProgress, TaskStatusEnum.Finished),
         };
         string taskId = (await _taskController.CreateAsync(createTaskDto)).Id;
 
@@ -620,11 +620,11 @@ internal class TaskControllerTests : BaseIntegrationTests
         {
             Name = GetRandomName(TaskEntity.MaximumNameLength + 1, TaskEntity.MaximumNameLength + 10),
             Description = GetRandomDescription(),
-            DueDate = createTaskDto.DueDate.AddDays(5),
-            StartDate = createTaskDto.StartDate.AddDays(2),
-            EndDate = createTaskDto.EndDate.AddDays(3),
-            Priority = TaskPriorityEnum.Medium,
-            Status = TaskStatusEnum.InProgress,
+            DueDate = GetFutureWorkDate(),
+            StartDate = GetFutureRandomDate(),
+            EndDate = GetFutureRandomDate(),
+            Priority = GetRandomPriority(TaskPriorityEnum.Medium, TaskPriorityEnum.Low),
+            Status = GetRandomStatus(TaskStatusEnum.New, TaskStatusEnum.InProgress, TaskStatusEnum.Finished),
         };
         var dataValidationException = Assert.ThrowsAsync<DataValidationException>(async () => await _taskController.UpdateAsync(taskId, updateTaskDto));
 
@@ -656,8 +656,8 @@ internal class TaskControllerTests : BaseIntegrationTests
             DueDate = GetFutureWorkDate(),
             StartDate = GetFutureRandomDate(),
             EndDate = GetFutureRandomDate(),
-            Priority = TaskPriorityEnum.Low,
-            Status = TaskStatusEnum.New,
+            Priority = GetRandomPriority(TaskPriorityEnum.Medium, TaskPriorityEnum.Low),
+            Status = GetRandomStatus(TaskStatusEnum.New, TaskStatusEnum.InProgress, TaskStatusEnum.Finished),
         };
         string taskId = (await _taskController.CreateAsync(createTaskDto)).Id;
 
@@ -669,8 +669,8 @@ internal class TaskControllerTests : BaseIntegrationTests
             DueDate = GetFutureWorkDate(),
             StartDate = GetFutureRandomDate(),
             EndDate = GetFutureRandomDate(),
-            Priority = TaskPriorityEnum.Medium,
-            Status = TaskStatusEnum.InProgress,
+            Priority = GetRandomPriority(TaskPriorityEnum.Medium, TaskPriorityEnum.Low),
+            Status = GetRandomStatus(TaskStatusEnum.New, TaskStatusEnum.InProgress, TaskStatusEnum.Finished),
         };
         var dataValidationException = Assert.ThrowsAsync<DataValidationException>(async () => await _taskController.UpdateAsync(taskId, updateTaskDto));
 
@@ -702,8 +702,8 @@ internal class TaskControllerTests : BaseIntegrationTests
             DueDate = GetFutureWorkDate(),
             StartDate = GetFutureRandomDate(),
             EndDate = GetFutureRandomDate(),
-            Priority = TaskPriorityEnum.Low,
-            Status = TaskStatusEnum.New,
+            Priority = GetRandomPriority(TaskPriorityEnum.Medium, TaskPriorityEnum.Low),
+            Status = GetRandomStatus(TaskStatusEnum.New, TaskStatusEnum.InProgress, TaskStatusEnum.Finished),
         };
         string taskId = (await _taskController.CreateAsync(createTaskDto)).Id;
 
@@ -715,8 +715,8 @@ internal class TaskControllerTests : BaseIntegrationTests
             DueDate = GetPastWorkDate(),
             StartDate = GetFutureRandomDate(),
             EndDate = GetFutureRandomDate(),
-            Priority = TaskPriorityEnum.Medium,
-            Status = TaskStatusEnum.InProgress,
+            Priority = GetRandomPriority(TaskPriorityEnum.Medium, TaskPriorityEnum.Low),
+            Status = GetRandomStatus(TaskStatusEnum.New, TaskStatusEnum.InProgress, TaskStatusEnum.Finished),
         };
         var dataValidationException = Assert.ThrowsAsync<DataValidationException>(async () => await _taskController.UpdateAsync(taskId, updateTaskDto));
 
@@ -745,11 +745,11 @@ internal class TaskControllerTests : BaseIntegrationTests
         {
             Name = GetRandomName(),
             Description = GetRandomDescription(),
-            DueDate = GetFutureRandomDate(),
+            DueDate = GetFutureWorkDate(),
             StartDate = GetFutureRandomDate(),
             EndDate = GetFutureRandomDate(),
-            Priority = TaskPriorityEnum.Low,
-            Status = TaskStatusEnum.New,
+            Priority = GetRandomPriority(TaskPriorityEnum.Medium, TaskPriorityEnum.Low),
+            Status = GetRandomStatus(TaskStatusEnum.New, TaskStatusEnum.InProgress, TaskStatusEnum.Finished),
         };
         string taskId = (await _taskController.CreateAsync(createTaskDto)).Id;
 
@@ -761,8 +761,8 @@ internal class TaskControllerTests : BaseIntegrationTests
             DueDate = GetFutureWeekdayDate(),
             StartDate = GetFutureRandomDate(),
             EndDate = GetFutureRandomDate(),
-            Priority = TaskPriorityEnum.Medium,
-            Status = TaskStatusEnum.InProgress,
+            Priority = GetRandomPriority(TaskPriorityEnum.Medium, TaskPriorityEnum.Low),
+            Status = GetRandomStatus(TaskStatusEnum.New, TaskStatusEnum.InProgress, TaskStatusEnum.Finished),
         };
         var dataValidationException = Assert.ThrowsAsync<DataValidationException>(async () => await _taskController.UpdateAsync(taskId, updateTaskDto));
 
@@ -794,8 +794,8 @@ internal class TaskControllerTests : BaseIntegrationTests
             DueDate = GetFutureWorkDate(),
             StartDate = GetFutureRandomDate(),
             EndDate = GetFutureRandomDate(),
-            Priority = TaskPriorityEnum.Low,
-            Status = TaskStatusEnum.New,
+            Priority = GetRandomPriority(TaskPriorityEnum.Medium, TaskPriorityEnum.Low),
+            Status = GetRandomStatus(TaskStatusEnum.New, TaskStatusEnum.InProgress, TaskStatusEnum.Finished),
         };
         string taskId = (await _taskController.CreateAsync(createTaskDto)).Id;
 
@@ -807,8 +807,8 @@ internal class TaskControllerTests : BaseIntegrationTests
             DueDate = GetFutureHolidayDate(),
             StartDate = GetFutureRandomDate(),
             EndDate = GetFutureRandomDate(),
-            Priority = TaskPriorityEnum.Medium,
-            Status = TaskStatusEnum.InProgress,
+            Priority = GetRandomPriority(TaskPriorityEnum.Medium, TaskPriorityEnum.Low),
+            Status = GetRandomStatus(TaskStatusEnum.New, TaskStatusEnum.InProgress, TaskStatusEnum.Finished),
         };
         var dataValidationException = Assert.ThrowsAsync<DataValidationException>(async () => await _taskController.UpdateAsync(taskId, updateTaskDto));
 
@@ -843,11 +843,11 @@ internal class TaskControllerTests : BaseIntegrationTests
             {
                 Name = GetRandomName(),
                 Description = GetRandomDescription(),
-                DueDate = new DateTime(2025, 1, 3),
+                DueDate = testDueDate,
                 StartDate = GetFutureRandomDate(),
                 EndDate = GetFutureRandomDate(),
                 Priority = TaskPriorityEnum.High,
-                Status = TaskStatusEnum.InProgress,
+                Status = GetRandomStatus(TaskStatusEnum.New, TaskStatusEnum.InProgress, TaskStatusEnum.Finished),
             };
             await _taskController.CreateAsync(createTaskDto);
         }
@@ -855,11 +855,11 @@ internal class TaskControllerTests : BaseIntegrationTests
         {
             Name = GetRandomName(),
             Description = GetRandomDescription(),
-            DueDate = new DateTime(2025, 1, 6),
+            DueDate = GetFutureWorkDate(),
             StartDate = GetFutureRandomDate(),
             EndDate = GetFutureRandomDate(),
-            Priority = TaskPriorityEnum.High,
-            Status = TaskStatusEnum.InProgress,
+            Priority = GetRandomPriority(TaskPriorityEnum.Medium, TaskPriorityEnum.Low),
+            Status = GetRandomStatus(TaskStatusEnum.New, TaskStatusEnum.InProgress, TaskStatusEnum.Finished),
         };
         string taskId = (await _taskController.CreateAsync(taskDto)).Id;
 
@@ -868,11 +868,11 @@ internal class TaskControllerTests : BaseIntegrationTests
         {
             Name = GetRandomName(),
             Description = GetRandomDescription(),
-            DueDate = new DateTime(2025, 1, 3),
+            DueDate = testDueDate,
             StartDate = GetFutureRandomDate(),
             EndDate = GetFutureRandomDate(),
             Priority = TaskPriorityEnum.High,
-            Status = TaskStatusEnum.InProgress,
+            Status = GetRandomStatus(TaskStatusEnum.New, TaskStatusEnum.InProgress),
         };
         var dataValidationException = Assert.ThrowsAsync<DataValidationException>(async () => await _taskController.UpdateAsync(taskId, updateTaskDto));
 
@@ -904,8 +904,8 @@ internal class TaskControllerTests : BaseIntegrationTests
             DueDate = GetFutureWorkDate(),
             StartDate = GetFutureRandomDate(),
             EndDate = GetFutureRandomDate(),
-            Priority = TaskPriorityEnum.Low,
-            Status = TaskStatusEnum.New,
+            Priority = GetRandomPriority(TaskPriorityEnum.Medium, TaskPriorityEnum.Low),
+            Status = GetRandomStatus(TaskStatusEnum.New, TaskStatusEnum.InProgress, TaskStatusEnum.Finished),
         };
         string taskId = (await _taskController.CreateAsync(createTaskDto)).Id;
 
@@ -956,6 +956,7 @@ internal class TaskControllerTests : BaseIntegrationTests
         }
 
         const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+
         return new string(Enumerable.Repeat(chars, Random.Shared.Next(minLength, maxLength + 1))
             .Select(s => s[Random.Shared.Next(s.Length)]).ToArray());
     }
@@ -983,6 +984,16 @@ internal class TaskControllerTests : BaseIntegrationTests
     private static DateTime GetFutureRandomDate()
     {
         return DateTime.Now.AddDays(Random.Shared.Next(11));
+    }
+
+    private static TaskPriorityEnum GetRandomPriority(params TaskPriorityEnum[] priorities)
+    {
+        return priorities[Random.Shared.Next(0, priorities.Length)];
+    }
+
+    private static TaskStatusEnum GetRandomStatus(params TaskStatusEnum[] statuses)
+    {
+        return statuses[Random.Shared.Next(0, statuses.Length)];
     }
 
     #endregion

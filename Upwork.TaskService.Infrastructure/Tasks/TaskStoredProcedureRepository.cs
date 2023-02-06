@@ -146,7 +146,10 @@ internal class TaskStoredProcedureRepository : IRepository<TaskEntity>
             {
                 throw new DataValidationException(validationResult.ToValidationResult());
             }
-            throw;
+            else
+            {
+                throw;
+            }
         }
         finally
         {
